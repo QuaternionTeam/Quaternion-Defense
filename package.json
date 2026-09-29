@@ -4,5 +4,12 @@
   "resourceFolder": "assets",
   "wollokVersion": "4.2.3",
   "author": "Quaternion Team",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "start": "wollok run ./src/juego.wpgm",
+    "test": "wollok test --skipValidations -p ./"
+  },
+  "dependencies": {
+    "wollok-ts-cli": "^1.1.0"
+  }
 }

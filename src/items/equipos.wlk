@@ -385,7 +385,7 @@ class AngelGuardian inherits Arma {
 	method estado() = if (resurreccion.momentoDeEnfriamiento() == 0) "Listo"
 	                  else "Enfriamiento"
 	
-	override method image() = ((("assets/Items/Equipos/Armas/" + self.nombre()) + "_") + self.estado()) + ".png"
+	override method image() = ((("Items/Equipos/Armas/" + self.nombre()) + "_") + self.estado()) + ".png"
 }
 
 class Arco inherits Arma {
@@ -512,7 +512,7 @@ class Casco inherits Equipo {
 		super()
 	}
 	
-	override method image() = ("assets/Items/Equipos/Cascos/" + self.nombre()) + ".png"
+	override method image() = ("Items/Equipos/Cascos/" + self.nombre()) + ".png"
 }
 
 class CascoTest inherits Casco {

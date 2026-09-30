@@ -3,7 +3,7 @@ import objetosEnJuego.objetosEnJuego.*
 import eventos.*
 
 object mensaje inherits ObjetoEnJuego {
-	override method image() = "assets/Interfaz/Mensaje/Cuadro.png"
+	override method image() = "Interfaz/Mensaje/Cuadro.png"
 	
 	method posicion() = game.at(16, game.height() - 2)
 	
@@ -38,7 +38,7 @@ object mensajeTexto inherits ObjetoEnJuego {
 	
 	method position() = mensaje.posicion()
 	
-	override method image() = ("assets/Interfaz/Mensaje/" + objetoConTexto.informacion()) + ".png"
+	override method image() = ("Interfaz/Mensaje/" + objetoConTexto.informacion()) + ".png"
 	
 	method establecerTexto(_objetoConTexto) {
 		objetoConTexto = _objetoConTexto

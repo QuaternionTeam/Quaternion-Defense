@@ -35,7 +35,7 @@ class Quemadura inherits EstadoAlterado {
 		periodo = 0.1,
 		momentoMaximo = 4,
 		objetoEnlazado = victima,
-		direccionImagen = "assets/EstadosAlterados/Quemadura/"
+		direccionImagen = "EstadosAlterados/Quemadura/"
 	)
 	
 	override method efectoInicial() = new EventoPeriodicoTemporal(
@@ -89,7 +89,7 @@ class Sangrado inherits EstadoAlterado {
 		periodo = 0.2,
 		momentoMaximo = 3,
 		objetoEnlazado = victima,
-		direccionImagen = "assets/EstadosAlterados/Sangrado/"
+		direccionImagen = "EstadosAlterados/Sangrado/"
 	)
 	
 	override method efectoInicial() = new EventoSimple(
@@ -138,7 +138,7 @@ class Escarcha inherits EstadoAlterado {
 	
 	override method animacionInicial() = new ImagenEnlazada(
 		objetoEnlazado = victima,
-		image = ("assets/EstadosAlterados/Escarcha/" + gravedad.toString()) + ".png"
+		image = ("EstadosAlterados/Escarcha/" + gravedad.toString()) + ".png"
 	)
 	
 	override method efectoInicial() = new EventoSimple(
@@ -203,7 +203,7 @@ class Escarcha inherits EstadoAlterado {
 class Congelado inherits EstadoAlterado {
 	override method animacionInicial() = new ImagenEnlazada(
 		objetoEnlazado = victima,
-		image = "assets/EstadosAlterados/Congelado.png"
+		image = "EstadosAlterados/Congelado.png"
 	)
 	
 	override method efectoInicial() = new EventoSimple(

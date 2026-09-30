@@ -27,7 +27,7 @@ class Item inherits ObjetoEnJuego {
 	
 	method numeroAMostrar()
 	
-	override method image() = ("assets/" + self.direccion()) + ".png"
+	override method image() = ("" + self.direccion()) + ".png"
 	
 	method direccion() = "Items/"
 	

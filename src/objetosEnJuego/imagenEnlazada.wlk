@@ -78,11 +78,11 @@ class AnimacionEnlazada inherits ImagenEnlazada {
 }
 
 class ParpadeoRojo inherits ImagenEnlazada {
-	override method image() = "assets/Efectos/Rojo_Transparente.png"
+	override method image() = "Efectos/Rojo_Transparente.png"
 }
 
 class ExplosionPerforante inherits ImagenEnlazada {
-	override method image() = "assets/Efectos/Explosion_Perforante.png"
+	override method image() = "Efectos/Explosion_Perforante.png"
 }
 
 class BarraDeVida inherits ImagenEnlazada {
@@ -98,7 +98,7 @@ class BarraDeVida inherits ImagenEnlazada {
 	method sufijo() = if (ocultarBarraLlena and self.estaLlena()) "Oculta"
 	                  else self.porcentajeDeVidaRedondeado().toString()
 	
-	override method image() = ("assets/Interfaz/BarraDeVida/Barra_De_Vida_" + self.sufijo()) + ".png"
+	override method image() = ("Interfaz/BarraDeVida/Barra_De_Vida_" + self.sufijo()) + ".png"
 }
 
 class BarraDeProgreso inherits ImagenEnlazada {
@@ -107,5 +107,5 @@ class BarraDeProgreso inherits ImagenEnlazada {
 		1
 	) * 100
 	
-	override method image() = ("assets/Interfaz/BarraDeInteraccion/Barra_De_Interaccion_" + self.porcentajeDeProgresoRedondeado().toString()) + ".png"
+	override method image() = ("Interfaz/BarraDeInteraccion/Barra_De_Interaccion_" + self.porcentajeDeProgresoRedondeado().toString()) + ".png"
 }

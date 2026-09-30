@@ -27,16 +27,16 @@ object menuDePreparacion {
 		game.addVisual(self)
 		
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/Panel.png"
+			image = "Interfaz/MenuDePreparacion/Panel.png"
 		).ubicar(3, 3) // Panel de fondo
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/Personajes.png"
+			image = "Interfaz/MenuDePreparacion/Personajes.png"
 		).ubicar(3, mayorPosY)
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/HabilidadesDelPersonaje.png"
+			image = "Interfaz/MenuDePreparacion/HabilidadesDelPersonaje.png"
 		).ubicar(3, mayorPosY - espaciado)
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/HabilidadesDisponibles.png"
+			image = "Interfaz/MenuDePreparacion/HabilidadesDisponibles.png"
 		).ubicar(3, mayorPosY - (espaciado * 2))
 		
 		self.generarSelectoresSobrevivientes(mayorPosY)
@@ -46,7 +46,7 @@ object menuDePreparacion {
 		
 		/* PUNTOS */
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/Puntos.png"
+			image = "Interfaz/MenuDePreparacion/Puntos.png"
 		).ubicar(9, mayorPosY - (espaciado * 4))
 		game.addVisual(
 			new DosDigitos_Unidad(
@@ -65,7 +65,7 @@ object menuDePreparacion {
 		
 		/* COSTE */
 		new ImagenSimple(
-			image = "assets/Interfaz/MenuDePreparacion/Coste.png"
+			image = "Interfaz/MenuDePreparacion/Coste.png"
 		).ubicar(18, mayorPosY - (espaciado * 4))
 		game.addVisual(
 			new DosDigitos_Unidad(
@@ -174,7 +174,7 @@ object menuDePreparacion {
 	
 	method tieneInterfaz(posicion) = not posicion.allElements().isEmpty()
 	
-	method image() = ("assets/Interfaz/MenuDeInicio/Menu_Animacion_" + estado) + ".png"
+	method image() = ("Interfaz/MenuDeInicio/Menu_Animacion_" + estado) + ".png"
 	
 	method avanzarAnimacion() {
 		estado += 1
@@ -248,7 +248,7 @@ object menuDePreparacion {
 
 object cargando {
 	method position() = game.origin()
-	method image() = "assets/Interfaz/MenuDeInicio/Menu_Cargando.png"
+	method image() = "Interfaz/MenuDeInicio/Menu_Cargando.png"
 } /******************** Cursores ********************/
 
 class ImagenSimple {
@@ -270,7 +270,7 @@ class CursorDePreparacion {
 	                             	"Activo"
 	                             else "Inactivo"
 	
-	method image() = ("assets/Interfaz/MenuDePreparacion/CursorDePreparacion_" + self.imagenSegunEstado()) + ".png"
+	method image() = ("Interfaz/MenuDePreparacion/CursorDePreparacion_" + self.imagenSegunEstado()) + ".png"
 	
 	method selectorEnCasilla() = game.colliders(self).get(1)
 	
@@ -420,7 +420,7 @@ object cursorDeHabilidadPosible inherits CursorDePreparacion {
 }
 
 object cursorContinuar inherits CursorDePreparacion {
-	override method image() = ("assets/Interfaz/MenuDePreparacion/BotonJugar_" + self.imagenSegunEstado()) + ".png"
+	override method image() = ("Interfaz/MenuDePreparacion/BotonJugar_" + self.imagenSegunEstado()) + ".png"
 	
 	method ubicar(posY) {
 		self.ubicar((game.width() / 2) - 1, posY)
@@ -462,12 +462,12 @@ class SelectorSobreviviente {
 	                              	)) "Abajo"
 	                              else "Arriba"
 	
-	method image() = ((("assets/Personajes/Sobrevivientes/" + self.seleccion().nombre()) + "/") + self.estadoPorSeleccion()) + ".png"
+	method image() = (("Personajes/Sobrevivientes/" + self.seleccion().nombre()) + "/") + self.estadoPorSeleccion()) + ".png"
 	
 	var property position = game.origin()
 	
 	method ubicar(posX, posY) {
-		new ImagenSimple(image = "assets/Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
+		new ImagenSimple(image = "Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
 			posX,
 			posY
 		)
@@ -485,7 +485,7 @@ class SelectorHabilidadActiva {
 	method image() = self.seleccion().image()
 	
 	method ubicar(posX, posY) {
-		new ImagenSimple(image = "assets/Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
+		new ImagenSimple(image = "Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
 			posX,
 			posY
 		)
@@ -509,7 +509,7 @@ class SelectorHabilidadPasiva {
 	method image() = self.seleccion().image()
 	
 	method ubicar(posX, posY) {
-		new ImagenSimple(image = "assets/Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
+		new ImagenSimple(image = "Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
 			posX,
 			posY
 		)
@@ -533,7 +533,7 @@ class SelectorHabilidadPosible {
 	method image() = self.seleccion().image()
 	
 	method ubicar(posX, posY) {
-		new ImagenSimple(image = "assets/Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
+		new ImagenSimple(image = "Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(
 			posX,
 			posY
 		)

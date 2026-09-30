@@ -66,7 +66,7 @@ class ObjetoDeInteraccion inherits ObjetoEnJuego {
 
 class Arbusto inherits ObjetoDeInteraccion {
 	const property image =
-	 ((("assets/Terreno/Recursos/" + self.nombreDeArbusto()) + "_") + new Range(
+	 ((("Terreno/Recursos/" + self.nombreDeArbusto()) + "_") + new Range(
 		start = 1,
 		end = 2
 	).anyOne()) + ".png"

@@ -33,7 +33,7 @@ class Estructura inherits ObjetoConVida {
 	
 	override method esAtravesable() = false
 	
-	override method image() = ("assets/Estructuras/" + self.nombre()) + ".png"
+	override method image() = ("Estructuras/" + self.nombre()) + ".png"
 }
 
 class EstructuraOfensiva inherits Estructura {

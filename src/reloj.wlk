@@ -32,7 +32,7 @@ object reloj
 
 object mensajeDePausa
 {
-	method image() = "assets/Interfaz/DatosEnPartida/Pausa.png"
+	method image() = "Interfaz/DatosEnPartida/Pausa.png"
 	method position() = game.at(1,1)
 	method ubicar()
 	{

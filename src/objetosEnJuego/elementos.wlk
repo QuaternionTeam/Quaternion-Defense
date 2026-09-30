@@ -50,7 +50,7 @@ class Elemento inherits ObjetoEnJuego {
 		eventoDeElemento.ejecutar()
 	}
 	
-	override method image() = (((("assets/Efectos/" + self.nombre()) + "/") + self.animacion()) + estado) + ".png"
+	override method image() = (((("Efectos/" + self.nombre()) + "/") + self.animacion()) + estado) + ".png"
 }
 
 class Rayo inherits Elemento {

@@ -277,7 +277,7 @@ class Sobreviviente inherits Personaje {
 		self.desequiparTodo()
 	}
 	
-	override method image() = ((("assets/Personajes/Sobrevivientes/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
+	override method image() = (("Personajes/Sobrevivientes/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
 	
 	// Obtiene la imagen de la carpeta assets aprovechando para donde mira el sobreviviente
 	override method inicializar() {
@@ -449,7 +449,7 @@ object karl inherits Sobreviviente (
 					return porcentaje
 				}
 				
-				override method image() = ("assets/Interfaz/BarraDeEscudo/Barra_De_Escudo_" + self.porcentajeDeEscudoRedondeadoAMultiploDe20().toString()) + ".png"
+				override method image() = ("Interfaz/BarraDeEscudo/Barra_De_Escudo_" + self.porcentajeDeEscudoRedondeadoAMultiploDe20().toString()) + ".png"
 			}
 		}
 		return escudo

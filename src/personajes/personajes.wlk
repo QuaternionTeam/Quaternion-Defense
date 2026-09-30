@@ -198,7 +198,7 @@ class Personaje inherits ObjetoConVida {
 					periodo = 0.2,
 					momentoMaximo = 2,
 					objetoEnlazado = self,
-					direccionImagen = "assets/Bloqueo"
+					direccionImagen = "Bloqueo"
 				)
 				const tiempo = new EventoSimple(
 					lista = eventos02Segundos,
@@ -223,7 +223,7 @@ class Personaje inherits ObjetoConVida {
 				periodo = 0.2,
 				momentoMaximo = 2,
 				objetoEnlazado = self,
-				direccionImagen = "assets/Efectos/Esquivo"
+				direccionImagen = "Efectos/Esquivo"
 			)
 			const tiempo = new EventoSimple(
 				lista = eventos02Segundos,
@@ -475,7 +475,7 @@ object ataqueHabilitado {
 				periodo = 0.2,
 				momentoMaximo = 2,
 				objetoEnlazado = objetivo,
-				direccionImagen = "assets/Efectos/Crítico"
+				direccionImagen = "Efectos/Crítico"
 			)
 			const tiempo = new EventoSimple(
 				lista = eventos02Segundos,

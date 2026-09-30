@@ -15,7 +15,6 @@ program QuaternionDefense
 	menuDeInicio.generar()
 	teclado.configurarTeclas()
 	sonido.cambiarEstado(sonidoActivado)
-	game.boardGround("assets/Terreno/Suelo/Fondo.png")
 	
 	menuDePreparacion.inicializarSobrevivientes()
  	game.start()

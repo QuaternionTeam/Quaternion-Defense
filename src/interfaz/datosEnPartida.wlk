@@ -27,7 +27,7 @@ object textoDeNivel {
 		)
 	}
 	
-	method image() = "assets/Interfaz/DatosEnPartida/Nivel.png"
+	method image() = "Interfaz/DatosEnPartida/Nivel.png"
 }
 
 object textoDeExperiencia {
@@ -55,7 +55,7 @@ object textoDeExperiencia {
 		)
 	}
 	
-	method image() = "assets/Interfaz/DatosEnPartida/Exp.png"
+	method image() = "Interfaz/DatosEnPartida/Exp.png"
 }
 
 object nivelDeSobrevivienteSeleccinoado {

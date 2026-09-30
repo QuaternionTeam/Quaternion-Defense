@@ -64,7 +64,7 @@ class ArbolVerde inherits Arbol (
 ) {
 	const property numero
 	
-	override method image() = ("assets/Terreno/Recursos/Arbol_1_" + numero) + ".png"
+	override method image() = ("Terreno/Recursos/Arbol_1_" + numero) + ".png"
 }
 
 class ArbolVerdeOscuro inherits Arbol (
@@ -72,7 +72,7 @@ class ArbolVerdeOscuro inherits Arbol (
 ) {
 	const property numero
 	
-	override method image() = ("assets/Terreno/Recursos/Arbol_2_" + numero) + ".png"
+	override method image() = ("Terreno/Recursos/Arbol_2_" + numero) + ".png"
 }
 
 class ArbolNaranja inherits Arbol (
@@ -80,7 +80,7 @@ class ArbolNaranja inherits Arbol (
 ) {
 	const property numero
 	
-	override method image() = ("assets/Terreno/Recursos/Arbol_3_" + numero) + ".png"
+	override method image() = ("Terreno/Recursos/Arbol_3_" + numero) + ".png"
 }
 
 class ArbolNevado inherits Arbol (
@@ -88,7 +88,7 @@ class ArbolNevado inherits Arbol (
 ) {
 	const property numero
 	
-	override method image() = ("assets/Terreno/Recursos/Arbol_4_" + numero) + ".png"
+	override method image() = ("Terreno/Recursos/Arbol_4_" + numero) + ".png"
 }
 
 class ArbolPelado inherits Arbol (
@@ -96,7 +96,7 @@ class ArbolPelado inherits Arbol (
 ) {
 	const property numero
 	
-	override method image() = ("assets/Terreno/Recursos/Arbol_5_" + numero) + ".png"
+	override method image() = ("Terreno/Recursos/Arbol_5_" + numero) + ".png"
 }
 
 class Roca inherits ObjetoExtraible (
@@ -118,7 +118,7 @@ class Roca inherits ObjetoExtraible (
 	
 	override method esAtravesable() = false
 	
-	override method image() = ("assets/Terreno/Recursos/Roca_" + tipo) + ".png"
+	override method image() = ("Terreno/Recursos/Roca_" + tipo) + ".png"
 }
 
 class MinaDeHierro inherits ObjetoExtraible (
@@ -138,7 +138,7 @@ class MinaDeHierro inherits ObjetoExtraible (
 	
 	override method esAtravesable() = false
 	
-	override method image() = "assets/Terreno/Recursos/Mina_De_Hierro.png"
+	override method image() = "Terreno/Recursos/Mina_De_Hierro.png"
 }
 
 class MinaDeOro inherits ObjetoExtraible (
@@ -158,5 +158,5 @@ class MinaDeOro inherits ObjetoExtraible (
 	
 	override method esAtravesable() = false
 	
-	override method image() = "assets/Terreno/Recursos/Mina_De_Oro.png"
+	override method image() = "Terreno/Recursos/Mina_De_Oro.png"
 }

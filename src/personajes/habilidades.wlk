@@ -83,7 +83,7 @@ class Habilidad
 	method coste() = 0
 	
 	method position() = position
-	method image() = "assets/Habilidades/" + self.nombre() + "_" + estado.nombre() + ".png"
+	method image() = "Habilidades/" + self.nombre() + "_" + estado.nombre() + ".png"
 			
 	method informacion() = "Habilidades/" + self.nombre()
 }
@@ -435,7 +435,7 @@ class ResurreccionIndividual
 		usuario.escenario().sobrevivientes().filter{ sobreviviente => sobreviviente.estaDerribado() }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
 	}
 
-	method image() = "assets/Habilidades/Revivir.png"
+	method image() = "Habilidades/Revivir.png"
 }
 
 object revivirNormal inherits ResurreccionIndividual
@@ -628,7 +628,7 @@ class CambioDeEnergias inherits HabilidadActiva
 	
 	override method coste() = 0
 	
-	override method image() = "assets/Habilidades/" + usuario.modo().modoOpuesto().energia() + "_" + estado.nombre() + ".png"
+	override method image() = "Habilidades/" + usuario.modo().modoOpuesto().energia() + "_" + estado.nombre() + ".png"
 }
 
 /******************** PASIVAS ********************/

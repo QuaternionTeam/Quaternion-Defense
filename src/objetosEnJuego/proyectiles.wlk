@@ -59,7 +59,7 @@ class FlechaSimple inherits Proyectil
 {	
 	method nombre() = "Flecha_Simple"
 	override method efecto(unObjetivo, unTirador) {}
-	override method image() = "assets/Proyectiles/" + self.nombre() + "/" + direccion.toString() + ".png"
+	override method image() = "Proyectiles/" + self.nombre() + "/" + direccion.toString() + ".png"
 }
 
 class FlechaIgnea inherits FlechaSimple
@@ -100,7 +100,7 @@ class FlechaPerforante inherits FlechaSimple
 		objetivosEnRango.forEach{ _objetivo => _objetivo.recibirAtaqueDeHabilidad(tirador, danio) }
 	}
 	
-	override method image() = "assets/Proyectiles/GranadaExplosiva/" + direccion.toString() + ".png"
+	override method image() = "Proyectiles/GranadaExplosiva/" + direccion.toString() + ".png"
 }
 
 class BalaDePistola inherits Proyectil
@@ -112,7 +112,7 @@ class BalaDePistola inherits Proyectil
 	
 	override method impactar(posicion, tirador) {  posicion.allElements().last().recibirAtaqueDeHabilidad(tirador, danio) }
 	
-	override method image() = "assets/Proyectiles/BalaDePistola/" + direccion.toString() + ".png"
+	override method image() = "Proyectiles/BalaDePistola/" + direccion.toString() + ".png"
 }*/
 
 

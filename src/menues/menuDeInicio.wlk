@@ -28,7 +28,7 @@ object menuDeInicio {
 		menuDePreparacion.generar()
 	}
 	
-	method image() = ("assets/Interfaz/MenuDeInicio/Menu_Animacion_" + estado) + ".png"
+	method image() = ("Interfaz/MenuDeInicio/Menu_Animacion_" + estado) + ".png"
 	
 	method avanzarAnimacion() {
 		estado += 1
@@ -40,5 +40,5 @@ object menuDeInicio {
 
 object titulo {
 	method position() = game.origin()
-	method image() = "assets/Interfaz/MenuDeInicio/TituloQuaternionDefense.png"
+	method image() = "Interfaz/MenuDeInicio/TituloQuaternionDefense.png"
 }

@@ -15,7 +15,7 @@ object sonido {
 
 object sonidoActivado {
 	method reproducir(audio) {
-		game.sound("assets/Sonidos/" + audio)
+		game.sound("Sonidos/" + audio)
 	}
 }
 

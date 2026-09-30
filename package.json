@@ -8,9 +8,15 @@
   "scripts": {
     "lint": "wollok lint -p ./src",
     "test": "wollok test -p ./src",
-    "start": "wollok run juego.QuaternionDefense -p ./src"
+    "start": "wollok run juego.QuaternionDefense -p ./src",
+    "build:web": "node scripts/build-web.mjs",
+    "serve": "npx --yes serve dist"
   },
   "dependencies": {
     "wollok-ts-cli": "^1.1.0"
+  },
+  "devDependencies": {
+    "p5": "^2.3.4",
+    "wollok-web-tools": "^2.1.1"
   }
 }

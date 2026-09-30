@@ -1,8 +1,40 @@
 # Quaternion Defense
 
-[![Build Status](https://github.com/wollok/pepitaGame/actions/workflows/ci.yml/badge.svg)](https://github.com/wollok/pepitaGame/actions/workflows/ci.yml)
+[![Build Status](https://github.com/QuaternionTeam/Quaternion-Defense/actions/workflows/ci.yml/badge.svg)](https://github.com/QuaternionTeam/Quaternion-Defense/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/QuaternionTeam/Quaternion-Defense/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/QuaternionTeam/Quaternion-Defense/actions/workflows/deploy-pages.yml)
+
+🎮 **[Jugar online](https://quaternionteam.github.io/Quaternion-Defense/)**
 
 ![capturaJuego](docs/capturaJuego.png)
+
+## Cómo jugar
+
+### Con servidor (desarrollo)
+
+```bash
+pnpm install
+pnpm start
+```
+
+Esto usa `wollok-ts-cli`, que corre el intérprete de Wollok en un servidor
+Node y transmite el estado del juego al navegador.
+
+### Como sitio estático (sin servidor)
+
+El juego puede compilarse a un sitio estático que corre completamente en el
+navegador (usando `wollok-web-tools`), sin necesidad de un servidor con el
+intérprete. El resultado en `dist/` se puede publicar en GitHub Pages, Netlify,
+etc.
+
+```bash
+pnpm install
+pnpm run build:web   # genera dist/
+pnpm run serve       # sirve dist/ con un servidor estático simple
+```
+
+> Nota: por seguridad del navegador (fetch de `manifest.json`), el sitio debe
+> servirse desde un servidor estático; no funciona abriendo `index.html` con
+> `file://`. Cualquier host de archivos estáticos sirve.
 
 ## Desarrolladores
 

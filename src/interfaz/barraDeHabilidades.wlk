@@ -1,10 +1,11 @@
 import wollok.game.*
+import pantalla.*
 import escenario.*
 import contadores.*
 import personajes.habilidades.*
 
 object barraDeHabilidades {
-	const posicion = game.at(5, game.height() - 1)
+	const posicion = game.at(5, pantalla.alto() - 1)
 	
 	method generar() {
 		const cantHabilidadesActivas = 3

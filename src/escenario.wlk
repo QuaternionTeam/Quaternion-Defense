@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import menues.menuDePreparacion.*
 import interfaz.inventarioGeneral.*
 import interfaz.inventarioDeRecursos.*
@@ -18,8 +19,8 @@ import reloj.*
 import eventos.*
 
 object escenario {
-	const anchoEscenario = game.width() - 3
-	const altoEscenario = game.height() - 2
+	const anchoEscenario = pantalla.ancho() - 3
+	const altoEscenario = pantalla.alto() - 2
 	var indiceSobrevivienteSeleccionado = 0
 	const property sobrevivientes = []
 	const property enemigos = []
@@ -38,7 +39,7 @@ object escenario {
 	method nroHorda() = nroHorda
 	
 	/******************** SpawnPoints ********************/
-	method spawnPoints(posX) = (1 .. (game.height() - 3)).map(
+	method spawnPoints(posX) = (1 .. (pantalla.alto() - 3)).map(
 		{ posY => game.at(posX, posY) }
 	)
 	
@@ -105,6 +106,17 @@ object escenario {
 			// Se alterna el sobrecviviente seleccionado al primero solo si era el ultimo
 			sobrevivientes.remove(sobreviviente)
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			// Saca al sobreviviente de la lista de sobrevivientes
 			if (not self.haySobrevivientes()) // Si no hay sobrevivientes en juego
 				self.perder()
@@ -126,7 +138,7 @@ object escenario {
 	method spawnearEnemigo(enemigo) {
 		try // Los zombies producen una excepción al ser creados si no encuentran lugar disponible para spawnear
 		{
-			enemigo.inicializar(self.spawnPointsValido(game.width() - 3))
+			enemigo.inicializar(self.spawnPointsValido(pantalla.ancho() - 3))
 			self.agregarEnemigo(enemigo)
 		} catch e : Exception {
 			console.println("No había spawn point válido para crear enemigo!")
@@ -176,6 +188,7 @@ object escenario {
 	
 	method generarEscenarioPasto() {
 		self.colocarFondos(pasto) // Coloca pasto
+		
 		2.times({ i => self.crearLago() }) // Genera lagos al azar
 		
 		// Genera recursos
@@ -245,6 +258,17 @@ object escenario {
 		eventoHordas.comenzar()
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//musica.reproducir()
 		if (nivel == 1) tutorial.iniciar()
 	}
@@ -267,9 +291,9 @@ object escenario {
 	}
 	
 	// Verdadero si puede estar en esa posicion, Falso si no
-	method esAtravesable(posicion) = self.estaDentro(posicion) and game.getObjectsIn(posicion).all(
-		{ objeto => objeto.esAtravesable() }
-	)
+	method esAtravesable(posicion) = self.estaDentro(
+		posicion
+	) and game.getObjectsIn(posicion).all({ objeto => objeto.esAtravesable() })
 	
 	method estaDentro(posicion) = posicion.x().between(
 		1,

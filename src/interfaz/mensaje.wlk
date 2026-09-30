@@ -1,11 +1,12 @@
 import wollok.game.*
+import pantalla.*
 import objetosEnJuego.objetosEnJuego.*
 import eventos.*
 
 object mensaje inherits ObjetoEnJuego {
 	override method image() = "Interfaz/Mensaje/Cuadro.png"
 	
-	method posicion() = game.at(16, game.height() - 2)
+	method posicion() = game.at(16, pantalla.alto() - 2)
 	
 	method position() = self.posicion()
 	

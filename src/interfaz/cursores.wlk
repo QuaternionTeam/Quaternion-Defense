@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import objetosEnJuego.objetosEnJuego.*
 import objetosEnJuego.imagenEnlazada.*
 import escenario.*
@@ -36,15 +37,16 @@ object cursorSobrevivienteSeleccionado inherits ImagenEnlazada (
 	override method image() = "Interfaz/Cursores/Cursor_Sobreviviente_Seleccionado.png"
 }
 
-object cursorDeInventario inherits Cursor (position = game.at(game.width() - 2, game.height() - 2)) {
-	
+object cursorDeInventario inherits Cursor (
+	position = game.at(pantalla.ancho() - 2, pantalla.alto() - 2)
+) {
 	// MOVIMIENTO
 	// Mueve el cursor a la nueva posicion sin salir del inventario
 	method mover(nuevaPosicion) {
 		if (nuevaPosicion.x().between(
-			game.width() - 2,
-			game.width() - 1
-		) and nuevaPosicion.y().between(1, game.height() - 2)) {
+			pantalla.ancho() - 2,
+			pantalla.ancho() - 1
+		) and nuevaPosicion.y().between(1, pantalla.alto() - 2)) {
 			position = nuevaPosicion
 			sonido.reproducir("Cursor.wav")
 		}

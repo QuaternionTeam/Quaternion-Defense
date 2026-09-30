@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import escenario.*
 import contadores.*
 import interfaz.*
@@ -6,7 +7,7 @@ import interfaz.*
 object inventarioDeEquipos {
 	const property alto = 3
 	const property ancho = 2
-	const posicion = game.at(game.width() - 2, game.height() - 2)
+	const posicion = game.at(pantalla.ancho() - 2, pantalla.alto() - 2)
 	
 	method generar() {
 		casillaArma.ubicarEn(posicion)

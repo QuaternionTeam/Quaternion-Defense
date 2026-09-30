@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import escenario.*
 import sonidos.*
 import teclado.*
@@ -26,12 +27,12 @@ object menuDePreparacion {
 		game.onTick(400, "Animacion_Menu", { self.avanzarAnimacion() })
 		game.addVisual(self)
 		
-		new ImagenSimple(
-			image = "Interfaz/MenuDePreparacion/Panel.png"
-		).ubicar(3, 3) // Panel de fondo
-		new ImagenSimple(
-			image = "Interfaz/MenuDePreparacion/Personajes.png"
-		).ubicar(3, mayorPosY)
+		new ImagenSimple(image = "Interfaz/MenuDePreparacion/Panel.png").ubicar(3, 3)
+		// Panel de fondo
+		new ImagenSimple(image = "Interfaz/MenuDePreparacion/Personajes.png").ubicar(
+			3,
+			mayorPosY
+		)
 		new ImagenSimple(
 			image = "Interfaz/MenuDePreparacion/HabilidadesDelPersonaje.png"
 		).ubicar(3, mayorPosY - espaciado)
@@ -45,9 +46,10 @@ object menuDePreparacion {
 		cursorContinuar.ubicar(mayorPosY - (espaciado * 3))
 		
 		/* PUNTOS */
-		new ImagenSimple(
-			image = "Interfaz/MenuDePreparacion/Puntos.png"
-		).ubicar(9, mayorPosY - (espaciado * 4))
+		new ImagenSimple(image = "Interfaz/MenuDePreparacion/Puntos.png").ubicar(
+			9,
+			mayorPosY - (espaciado * 4)
+		)
 		game.addVisual(
 			new DosDigitos_Unidad(
 				objetoConNumero = puntos,
@@ -64,9 +66,10 @@ object menuDePreparacion {
 		)
 		
 		/* COSTE */
-		new ImagenSimple(
-			image = "Interfaz/MenuDePreparacion/Coste.png"
-		).ubicar(18, mayorPosY - (espaciado * 4))
+		new ImagenSimple(image = "Interfaz/MenuDePreparacion/Coste.png").ubicar(
+			18,
+			mayorPosY - (espaciado * 4)
+		)
 		game.addVisual(
 			new DosDigitos_Unidad(
 				objetoConNumero = self,
@@ -87,7 +90,7 @@ object menuDePreparacion {
 	
 	method generarSelectoresSobrevivientes(posY) {
 		const posX_Inicial =
-		 ((game.width() / 2) - ((sobrevivientes.size() * espaciado) / 2)) + 1
+		 ((pantalla.ancho() / 2) - ((sobrevivientes.size() * espaciado) / 2)) + 1
 		
 		var desplazamientoX = 0
 		sobrevivientes.forEach(
@@ -107,7 +110,7 @@ object menuDePreparacion {
 		const cantidadDeHabilidades = betty.cantidadHabilidades()
 		
 		const posX_Inicial =
-		 ((game.width() / 2) - ((cantidadDeHabilidades * espaciado) / 2)) + 1
+		 ((pantalla.ancho() / 2) - ((cantidadDeHabilidades * espaciado) / 2)) + 1
 		
 		var desplazamientoX = 0
 		(cantidadDeHabilidades / 2).times(
@@ -135,7 +138,7 @@ object menuDePreparacion {
 		const cantidadDeHabilidadesPosibles = betty.cantidadHabilidadesPosibles()
 		
 		const posX_Inicial =
-		 ((game.width() / 2) - ((cantidadDeHabilidadesPosibles * espaciado) / 2)) + 1
+			((pantalla.ancho() / 2) - ((cantidadDeHabilidadesPosibles * espaciado) / 2)) + 1
 		
 		var desplazamientoX = 0
 		cantidadDeHabilidadesPosibles.times(
@@ -248,6 +251,7 @@ object menuDePreparacion {
 
 object cargando {
 	method position() = game.origin()
+	
 	method image() = "Interfaz/MenuDeInicio/Menu_Cargando.png"
 } /******************** Cursores ********************/
 
@@ -423,7 +427,7 @@ object cursorContinuar inherits CursorDePreparacion {
 	override method image() = ("Interfaz/MenuDePreparacion/BotonJugar_" + self.imagenSegunEstado()) + ".png"
 	
 	method ubicar(posY) {
-		self.ubicar((game.width() / 2) - 1, posY)
+		self.ubicar((pantalla.ancho() / 2) - 1, posY)
 	}
 	
 	method moverArriba() {
@@ -456,6 +460,7 @@ object cursorContinuar inherits CursorDePreparacion {
 
 class SelectorSobreviviente {
 	const property sobreviviente
+	var property position = game.origin()
 	
 	method estadoPorSeleccion() = if (menuDePreparacion.estaSeleccionado(
 	                              		self.seleccion()
@@ -463,8 +468,6 @@ class SelectorSobreviviente {
 	                              else "Arriba"
 	
 	method image() = ((("Personajes/Sobrevivientes/" + self.seleccion().nombre()) + "/") + self.estadoPorSeleccion()) + ".png"
-	
-	var property position = game.origin()
 	
 	method ubicar(posX, posY) {
 		new ImagenSimple(image = "Interfaz/Marco/Interfaz_Marco_Grande.png").ubicar(

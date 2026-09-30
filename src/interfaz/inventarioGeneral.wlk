@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import items.items.*
 import interfaz.*
 
@@ -7,7 +8,7 @@ object inventarioGeneral {
 	const maximaCantidadDeItems = 20
 	const ancho = 2
 	const alto = maximaCantidadDeItems / ancho
-	const posicion = game.at(game.width() - 3, game.height() - 4)
+	const posicion = game.at(pantalla.ancho() - 3, pantalla.alto() - 4)
 	
 	method items() = items
 	

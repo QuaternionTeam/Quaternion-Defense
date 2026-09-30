@@ -1,9 +1,10 @@
 import wollok.game.*
+import pantalla.*
 import escenario.*
 import contadores.*
 
 object textoDeNivel {
-	const posicion = game.at(1, game.height() - 1)
+	const posicion = game.at(1, pantalla.alto() - 1)
 	
 	method position() = posicion
 	
@@ -31,7 +32,7 @@ object textoDeNivel {
 }
 
 object textoDeExperiencia {
-	const posicion = game.at(13, game.height() - 1)
+	const posicion = game.at(13, pantalla.alto() - 1)
 	
 	method position() = posicion
 	

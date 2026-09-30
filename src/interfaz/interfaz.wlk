@@ -1,4 +1,5 @@
 import wollok.game.*
+import pantalla.*
 import datosEnPartida.*
 import barraDeHabilidades.*
 import inventarioDeEquipos.*
@@ -11,8 +12,8 @@ import items.items.*
 import items.equipos.*
 
 object interfaz {
-	const ancho = game.width()
-	const alto = game.height()
+	const ancho = pantalla.ancho()
+	const alto = pantalla.alto()
 	var itemACombinar = null
 	
 	method itemACombinar() = if (itemACombinar == null) {
@@ -30,7 +31,10 @@ object interfaz {
 	}
 	
 	method crearCasillaMarcoInventario(x, y) {
-		const casillaInventario = new FondoInterfaz(imagen = "Interfaz_Marco", position = game.at(x, y))
+		const casillaInventario = new FondoInterfaz(
+			imagen = "Interfaz_Marco",
+			position = game.at(x, y)
+		)
 		game.addVisual(casillaInventario)
 	}
 	
@@ -96,8 +100,16 @@ object interfaz {
 		6.times(
 			{ num => self.crearCasillaInterfaz(5 + num, alto - 1, "Interfaz_Marco") }
 		)
-		self.crearCasillaInterfaz(6, game.height() - 1, "Interfaz_Vertical_Izquierda")
-		self.crearCasillaInterfaz(11, game.height() - 1, "Interfaz_Vertical_Derecha")
+		self.crearCasillaInterfaz(
+			6,
+			pantalla.alto() - 1,
+			"Interfaz_Vertical_Izquierda"
+		)
+		self.crearCasillaInterfaz(
+			11,
+			pantalla.alto() - 1,
+			"Interfaz_Vertical_Derecha"
+		)
 		
 		// Genera bordes y marcos equipos
 		3.times(

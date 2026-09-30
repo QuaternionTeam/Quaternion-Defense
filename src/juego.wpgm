@@ -4,11 +4,11 @@ import teclado.*
 import reloj.*
 import menues.menuDePreparacion.*
 import sonidos.*
+import pantalla.*
 
-program QuaternionDefense
-{
-	game.width(31)
-	game.height(17)
+program QuaternionDefense {
+	game.width(pantalla.ancho())
+	game.height(pantalla.alto())
 	game.title("Quaternion Defense")
 	
 	reloj.comenzarEventos()
@@ -17,5 +17,5 @@ program QuaternionDefense
 	sonido.cambiarEstado(sonidoActivado)
 	
 	menuDePreparacion.inicializarSobrevivientes()
- 	game.start()
+	game.start()
 }

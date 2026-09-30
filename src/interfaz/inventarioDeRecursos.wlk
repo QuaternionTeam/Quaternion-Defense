@@ -1,9 +1,10 @@
 import wollok.game.*
+import pantalla.*
 import interfaz.*
 import items.recursos.*
 
 object inventarioDeRecursos {
-	const posicion = game.at(game.width() - 2, 2)
+	const posicion = game.at(pantalla.ancho() - 2, 2)
 	
 	method generar() {
 		new CasillaRecurso(recurso = madera).ubicarEn(

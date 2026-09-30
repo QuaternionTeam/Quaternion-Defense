@@ -127,7 +127,7 @@ class Enemigo inherits Personaje {
 		orientacion = izquierda
 	}
 	
-	override method image() = (("Personajes/Enemigos/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
+	override method image() = ((("Personajes/Enemigos/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
 }
 
 class ZombieTipo1 inherits Enemigo {

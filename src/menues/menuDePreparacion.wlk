@@ -462,7 +462,7 @@ class SelectorSobreviviente {
 	                              	)) "Abajo"
 	                              else "Arriba"
 	
-	method image() = (("Personajes/Sobrevivientes/" + self.seleccion().nombre()) + "/") + self.estadoPorSeleccion()) + ".png"
+	method image() = ((("Personajes/Sobrevivientes/" + self.seleccion().nombre()) + "/") + self.estadoPorSeleccion()) + ".png"
 	
 	var property position = game.origin()
 	

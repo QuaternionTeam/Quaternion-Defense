@@ -277,7 +277,7 @@ class Sobreviviente inherits Personaje {
 		self.desequiparTodo()
 	}
 	
-	override method image() = (("Personajes/Sobrevivientes/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
+	override method image() = ((("Personajes/Sobrevivientes/" + self.nombre()) + "/") + self.estadoDeAnimacion()) + ".png"
 	
 	// Obtiene la imagen de la carpeta assets aprovechando para donde mira el sobreviviente
 	override method inicializar() {

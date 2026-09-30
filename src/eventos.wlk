@@ -40,8 +40,8 @@ object eventos1Segundo inherits ListaDeEventos {}
 
 class Evento
 {
-	const lista 
-	const accion
+	const property lista
+	const property accion
 	
 	method comenzar()
 	{
@@ -59,59 +59,37 @@ class Evento
 
 class EventoSimple inherits Evento
 {
-	var demora
-	var momento
-	
-	constructor(_lista, _demora, _accion) 
-	{
-		demora = _demora
-		accion = _accion
-		momento = demora
-	
-		lista = _lista
-	}
+	var property demora
+	var property momento = demora
 	
 	override method ejecutar()
-	{		
+	{
 		self.interrumpir()
-		super()
+		accion.apply()
 	}
 	
 	method avanzarTiempo(segundos)
 	{
 		momento = 0.max(momento - segundos)
-		
-		if(	momento == 0)
-		{
+		if (momento == 0) {
 			momento = demora
-			self.ejecutar()	
+			self.ejecutar()
 		}
 	}
 	
 	override method reiniciar() { momento = demora }
 	
-	method modificarDemora(segundos) 
-	{ 
-		demora = demora + segundos  
+	method modificarDemora(segundos)
+	{
+		demora = demora + segundos
 		momento = momento + segundos
 	}
-	
-	method momento() = momento
 }
 
 class EventoPeriodico inherits Evento
 {
-	var periodo
-	var momento
-	
-	constructor(_lista, _periodo, _accion)
-	{
-		periodo = _periodo
-		momento = periodo
-		accion = _accion
-		
-		lista = _lista
-	}
+	var property periodo
+	var property momento = periodo
 	
 	method avanzarTiempo(segundos)
 	{
@@ -131,37 +109,25 @@ class EventoPeriodico inherits Evento
 		periodo = periodo + segundos
 		momento = momento + segundos
 	}
-	
-	method momento() = momento
 }
 
 class EventoPeriodicoTemporal
 {
-	const eventoPeriodico
-	const eventoSimple
-	
-	constructor(lista, duracion, accion)
-	{
-		eventoPeriodico = new EventoPeriodico(lista, 1, accion)
-		eventoSimple = new EventoSimple(lista, duracion, { eventoPeriodico.interrumpir() })
-	}
-	
-	constructor(lista, duracion, periodo, accion)
-	{
-		eventoPeriodico = new EventoPeriodico(lista, periodo, accion)
-		eventoSimple = new EventoSimple(lista, duracion, { eventoPeriodico.interrumpir() })
-	}
-	
-	constructor(lista, duracion, periodo, accion, accionAlTerminar)
-	{
-		eventoPeriodico = new EventoPeriodico(lista, periodo, accion)
-		eventoSimple = new EventoSimple(lista, duracion, { eventoPeriodico.interrumpir() accionAlTerminar.apply() })
-	}
+	const property lista
+	const property duracion
+	const property periodo = 1
+	const property accion
+	const property accionAlTerminar = {}
+	const property eventoPeriodico = new EventoPeriodico(lista = lista, periodo = periodo, accion = accion)
+	const property eventoSimple = new EventoSimple(lista = lista, demora = duracion, accion = {
+		eventoPeriodico.interrumpir()
+		accionAlTerminar.apply()
+	})
 	
 	method avanzarTiempo(segundos)
 	{
-		eventoPeriodico.avanzarTiempo()
-		eventoSimple.avanzarTiempo()
+		eventoPeriodico.avanzarTiempo(segundos)
+		eventoSimple.avanzarTiempo(segundos)
 	}
 	
 	method comenzar()

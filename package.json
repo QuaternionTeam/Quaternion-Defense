@@ -1,0 +1,23 @@
+{
+  "name": "quaternion-defense",
+  "version": "1.0.0",
+  "resourceFolder": "assets",
+  "wollokVersion": "4.3.0",
+  "author": "Quaternion Team",
+  "license": "ISC",
+  "packageManager": "pnpm@11.8.0",
+  "scripts": {
+    "lint": "wollok lint -p ./src",
+    "test": "wollok test -p ./src",
+    "start": "wollok run juego.QuaternionDefense -p ./src",
+    "build:web": "node scripts/build-web.mjs",
+    "serve": "npx --yes serve dist"
+  },
+  "dependencies": {
+    "wollok-ts-cli": "^1.1.0"
+  },
+  "devDependencies": {
+    "p5": "^2.3.4",
+    "wollok-web-tools": "^2.1.1"
+  }
+}

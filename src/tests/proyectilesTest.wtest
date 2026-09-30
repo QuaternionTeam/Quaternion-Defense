@@ -9,7 +9,7 @@ import escenario.*
 
 describe "Proyectiles"
 {
-	const flechaSimple = new FlechaSimple(betty, 10)
+	const flechaSimple = new FlechaSimple(tirador = betty, danio = 10)
 	
 	test "Al instanciar un proyectil, se establece la direccion en la que avanza (orientacion del tirador) y la posicion (la del tirador) " 
 	{
@@ -49,14 +49,14 @@ describe "Proyectiles"
 
 describe "Flechas"
 {
-	fixture
+	method initialize()
 	{
 		jan.inicializar()
 	}
 	
 	test "Flecha Ignea, quema" 
 	{
-		const flecha = new FlechaIgnea(betty, 0)
+		const flecha = new FlechaIgnea(tirador = betty, danio = 0)
 		game.addVisual(flecha)
 		flecha.impactar()
 		
@@ -64,7 +64,7 @@ describe "Flechas"
 	}
 	test "Flecha Gelida, escarcha" 
 	{
-		const flecha = new FlechaGelida(betty, 0)
+		const flecha = new FlechaGelida(tirador = betty, danio = 0)
 		game.addVisual(flecha)
 		flecha.impactar()
 		
@@ -72,7 +72,7 @@ describe "Flechas"
 	}
 	test "Flecha Oscura, cega" 
 	{
-		const flecha = new FlechaOscura(betty, 0)
+		const flecha = new FlechaOscura(tirador = betty, danio = 0)
 		game.addVisual(flecha)
 		flecha.impactar()
 		

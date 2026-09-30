@@ -54,19 +54,13 @@ class Diagonal
 	const property horizontal
 	const property vertical
 	
-	constructor(_horizontal, _vertical)
-	{
-		horizontal = _horizontal
-		vertical = _vertical
-	}
-	
 	method posicion(posicion) = vertical.posicion(horizontal.posicion(posicion))
 	
 	method posicion(posicion, n) = vertical.posicion(horizontal.posicion(posicion, n), n)
 	
-	method opuesta() = new Diagonal(horizontal.opuesta(), vertical.opuesta())
+	method opuesta() = new Diagonal(horizontal = horizontal.opuesta(), vertical = vertical.opuesta())
 	
-	method ortogonales() = [new Diagonal(horizontal, vertical.opuesta()), new Diagonal(horizontal.opuesta(), vertical)]
-	
-	override method ==(diagonal) = diagonal.horizontal() == horizontal and diagonal.vertical() == vertical
+	method ortogonales() = [new Diagonal(horizontal = horizontal, vertical = vertical.opuesta()), new Diagonal(horizontal = horizontal.opuesta(), vertical = vertical)]
+
+	override method == (diagonal) = diagonal.horizontal() == horizontal and diagonal.vertical() == vertical
 }

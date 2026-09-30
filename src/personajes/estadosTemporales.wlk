@@ -1,58 +1,59 @@
 import wollok.game.*
 import eventos.*
-
-import personajes.personajes.*
+import personajes.*
 import objetosEnJuego.imagenEnlazada.*
 
 /******************** Estado Alterado ********************/
-class EstadoAlterado
-{
-	const victima
-	var gravedad
+class EstadoAlterado {
+	const property victima
+	var property gravedad
+	const property efecto = self.efectoInicial()
+	const property animacion = self.animacionInicial()
 	
-	const property efecto 
-	const property animacion
+	method efectoInicial() = null
 	
-	method aumentarDuracion(aumento)
-	{
+	method animacionInicial() = null
+	
+	method aumentarDuracion(aumento) {
 		efecto.aumentarDemora(aumento)
 	}
 	
-	method reiniciarDuracion()
-	{
+	method reiniciarDuracion() {
 		efecto.reiniciar()
 	}
 	
-	method victima() = victima
-	method gravedad() = gravedad
-	
-	method aumentarGravedad(n)
-	{
-		gravedad = gravedad + n
+	method aumentarGravedad(n) {
+		gravedad += n
 	}
 }
 
-class Quemadura inherits EstadoAlterado
-{
+class Quemadura inherits EstadoAlterado {
 	const duracion = 5
-	const agresor
+	const property agresor
 	
-	constructor(_victima, _agresor, _gravedad) 
-	{
-		gravedad = _gravedad
-		victima = _victima
-	 	agresor = _agresor
-			
-		animacion = new AnimacionEnlazada(0.1, 4, victima, "assets/EstadosAlterados/Quemadura/")
-		efecto = new EventoPeriodicoTemporal(eventos1Segundo, duracion, 1, { victima.sufrirDanio(victima.porcentajeDeVidaMaxima(gravedad), agresor) }, { self.terminar() })
+	override method animacionInicial() = new AnimacionEnlazada(
+		periodo = 0.1,
+		momentoMaximo = 4,
+		objetoEnlazado = victima,
+		direccionImagen = "EstadosAlterados/Quemadura/"
+	)
+	
+	override method efectoInicial() = new EventoPeriodicoTemporal(
+		lista = eventos1Segundo,
+		duracion = duracion,
+		periodo = 1,
+		accion = { victima.sufrirDanio(
+				victima.porcentajeDeVidaMaxima(gravedad),
+				agresor
+			) },
+		accionAlTerminar = { self.terminar() }
+	)
+	
+	method aplicar() {
+		victima.estadoDeQuemadura().aplicar(self)
 	}
 	
-	method agresor() = agresor
-	
-	method aplicar() { victima.estadoDeQuemadura().aplicar(self) }
-	
-	method comenzar()
-	{
+	method comenzar() {
 		victima.quemadura(self)
 		victima.estadoDeQuemadura(tieneEstadoAlterado)
 		
@@ -60,8 +61,7 @@ class Quemadura inherits EstadoAlterado
 		animacion.comenzar()
 	}
 	
-	method terminar()
-	{
+	method terminar() {
 		victima.quemadura(null)
 		victima.estadoDeQuemadura(noTieneEstadoAlterado)
 		
@@ -69,35 +69,40 @@ class Quemadura inherits EstadoAlterado
 		animacion.interrumpir()
 	}
 	
-	method reAplicar()
-	{
+	method reAplicar() {
 		const quemaduraAnterior = victima.quemadura()
 		
 		quemaduraAnterior.terminar()
 		
-		const quemaduraDeMayorGravedad = [quemaduraAnterior, self].max{ quemadura => quemadura.gravedad() }
+		const quemaduraDeMayorGravedad = [quemaduraAnterior, self].max(
+			{ quemadura => quemadura.gravedad() }
+		)
 		
 		quemaduraDeMayorGravedad.aplicar()
 	}
 }
 
-class Sangrado inherits EstadoAlterado
-{
+class Sangrado inherits EstadoAlterado {
 	const duracion = 6
 	
-	constructor(_victima, _gravedad)
-	{
-		gravedad = _gravedad
-		victima = _victima
-		
-		animacion = new AnimacionEnlazada(0.2, 3, victima, "assets/EstadosAlterados/Sangrado/")
-		efecto = new EventoSimple(eventos1Segundo, duracion, { victima.curarSangrado() })
+	override method animacionInicial() = new AnimacionEnlazada(
+		periodo = 0.2,
+		momentoMaximo = 3,
+		objetoEnlazado = victima,
+		direccionImagen = "EstadosAlterados/Sangrado/"
+	)
+	
+	override method efectoInicial() = new EventoSimple(
+		lista = eventos1Segundo,
+		demora = duracion,
+		accion = { victima.curarSangrado() }
+	)
+	
+	method aplicar() {
+		victima.estadoDeSangrado().aplicar(self)
 	}
 	
-	method aplicar() { victima.estadoDeSangrado().aplicar(self) }
-	
-	method comenzar()
-	{
+	method comenzar() {
 		victima.modificarConstanteDeDanioRecibido(gravedad)
 		victima.sangrado(self)
 		victima.estadoDeSangrado(tieneEstadoAlterado)
@@ -106,8 +111,7 @@ class Sangrado inherits EstadoAlterado
 		animacion.comenzar()
 	}
 	
-	method terminar()
-	{
+	method terminar() {
 		victima.modificarConstanteDeDanioRecibido(-gravedad)
 		victima.sangrado(null)
 		victima.estadoDeSangrado(noTieneEstadoAlterado)
@@ -116,57 +120,55 @@ class Sangrado inherits EstadoAlterado
 		animacion.interrumpir()
 	}
 	
-	method reAplicar()
-	{
+	method reAplicar() {
 		const sangradoAnterior = victima.sangrado()
 		
-		sangradoAnterior.aumentarGravedad(gravedad*2)
+		sangradoAnterior.aumentarGravedad(gravedad * 2)
 		sangradoAnterior.reiniciarDuracion()
 	}
 	
-	override method aumentarGravedad(n)
-	{
+	override method aumentarGravedad(n) {
 		super(n)
 		victima.modificarConstanteDeDanioRecibido(n)
 	}
 }
 
-class Escarcha inherits EstadoAlterado
-{
+class Escarcha inherits EstadoAlterado {
 	const duracion = 3
 	
-	constructor(_victima, _gravedad)
-	{
-		gravedad = _gravedad
-		victima = _victima
-		
-		animacion = new ImagenEnlazada(victima, "assets/EstadosAlterados/Escarcha/"+ gravedad.toString() +".png")
-		efecto = new EventoSimple(eventos1Segundo, duracion, { victima.curarEscarcha() })
-	}
-
-	method aplicar() { victima.estadoDeEscarcha().aplicar(self) }
+	override method animacionInicial() = new ImagenEnlazada(
+		objetoEnlazado = victima,
+		image = ("EstadosAlterados/Escarcha/" + gravedad.toString()) + ".png"
+	)
 	
-	method comenzar()
-	{
-		if(victima.congelado() == null)
-		{ 
-			victima.modificarProbabilidadDeBloqueo(-10*gravedad)
-			victima.modificarProbabilidadDeEvasion(-10*gravedad)
-			victima.modificarAtaque(-5*gravedad)
+	override method efectoInicial() = new EventoSimple(
+		lista = eventos1Segundo,
+		demora = duracion,
+		accion = { victima.curarEscarcha() }
+	)
+	
+	method aplicar() {
+		victima.estadoDeEscarcha().aplicar(self)
+	}
+	
+	method comenzar() {
+		if (victima.congelado() == null) {
+			victima.modificarProbabilidadDeBloqueo((-10) * gravedad)
+			victima.modificarProbabilidadDeEvasion((-10) * gravedad)
+			victima.modificarAtaque((-5) * gravedad)
 			
 			victima.escarcha(self)
 			victima.estadoDeEscarcha(tieneEstadoAlterado)
 			
 			efecto.comenzar()
-			game.addVisual(animacion) 
-		}	
+			game.addVisual(animacion)
+		}
 	}
 	
-	method terminar()
-	{
-		victima.modificarProbabilidadDeBloqueo(10*gravedad)
-		victima.modificarProbabilidadDeEvasion(10*gravedad)
-		victima.modificarAtaque(5*gravedad)
+	method terminar() {
+		victima.modificarProbabilidadDeBloqueo(10 * gravedad)
+		victima.modificarProbabilidadDeEvasion(10 * gravedad)
+		victima.modificarAtaque(5 * gravedad)
 		
 		victima.escarcha(null)
 		victima.estadoDeEscarcha(noTieneEstadoAlterado)
@@ -175,50 +177,46 @@ class Escarcha inherits EstadoAlterado
 		game.removeVisual(animacion)
 	}
 	
-	method reAplicar()
-	{
+	method reAplicar() {
 		const escarchaAnterior = victima.escarcha()
 		
 		escarchaAnterior.aumentarGravedad(gravedad)
 		escarchaAnterior.efecto().reiniciar()
 	}
 	
-	override method aumentarGravedad(n)
-	{
+	override method aumentarGravedad(n) {
 		super(n)
 		
-		if(gravedad <5)
-		{
-			victima.modificarProbabilidadDeBloqueo(-10*n)
-			victima.modificarProbabilidadDeEvasion(-10*n)
-			victima.modificarAtaque(-5*n)
-		}
-		else
-		{
+		if (gravedad < 5) {
+			victima.modificarProbabilidadDeBloqueo((-10) * n)
+			victima.modificarProbabilidadDeEvasion((-10) * n)
+			victima.modificarAtaque((-5) * n)
+		} else {
 			self.terminar()
 			
-			const congelado = new Congelado(victima, 3)
+			const congelado = new Congelado(victima = victima, gravedad = 3)
 			congelado.aplicar()
 		}
 	}
 }
 
-class Congelado inherits EstadoAlterado
-{
-	constructor(_victima, _gravedad)
-	{
-		victima = _victima
-		gravedad = _gravedad
-		
-		animacion = new ImagenEnlazada(victima, "assets/EstadosAlterados/Congelado.png")
-		
-		efecto = new EventoSimple(eventos1Segundo, gravedad, { victima.curarCongelado() })
-	}
-
-	method aplicar() { victima.estadoDeCongelado().aplicar(self) }
+class Congelado inherits EstadoAlterado {
+	override method animacionInicial() = new ImagenEnlazada(
+		objetoEnlazado = victima,
+		image = "EstadosAlterados/Congelado.png"
+	)
 	
-	method comenzar()
-	{
+	override method efectoInicial() = new EventoSimple(
+		lista = eventos1Segundo,
+		demora = gravedad,
+		accion = { victima.curarCongelado() }
+	)
+	
+	method aplicar() {
+		victima.estadoDeCongelado().aplicar(self)
+	}
+	
+	method comenzar() {
 		victima.deshabilitarAtaque()
 		victima.deshabilitarHabilidades()
 		victima.comportamientoDeMovimiento(inmobilizadoTotalmente)
@@ -227,11 +225,10 @@ class Congelado inherits EstadoAlterado
 		victima.estadoDeCongelado(tieneEstadoAlterado)
 		
 		efecto.comenzar()
-		game.addVisualIn(animacion, victima.position())
+		game.addVisual(animacion)
 	}
 	
-	method terminar()
-	{
+	method terminar() {
 		victima.habilitarAtaque()
 		victima.habilitarHabilidades()
 		victima.comportamientoDeMovimiento(normal)
@@ -243,41 +240,40 @@ class Congelado inherits EstadoAlterado
 		game.removeVisual(animacion)
 	}
 	
-	method reAplicar()
-	{
+	method reAplicar() {
 		const congeladoAnterior = victima.congelado()
 		
 		congeladoAnterior.aumentarGravedad(1)
 	}
 	
-	override method aumentarGravedad(n) 
-	{
+	override method aumentarGravedad(n) {
 		super(n)
 		efecto.modificarDemora(n)
 	}
 }
 
-class Ceguera inherits EstadoAlterado
-{
+class Ceguera inherits EstadoAlterado {
 	const duracion = 6
 	
-	constructor(_victima, _gravedad)
-	{
-		gravedad = _gravedad
-		victima = _victima
-		
-		animacion = new ImagenEnlazada(victima, "assets/EstadosAlterados/Ceguera.png")
-		
-		efecto = new EventoSimple(eventos1Segundo, duracion, { self.terminar() })
+	override method animacionInicial() = new ImagenEnlazada(
+		objetoEnlazado = victima,
+		image = "EstadosAlterados/Ceguera.png"
+	)
+	
+	override method efectoInicial() = new EventoSimple(
+		lista = eventos1Segundo,
+		demora = duracion,
+		accion = { self.terminar() }
+	)
+	
+	method ralentizacion() = 30 + (gravedad * 10)
+	
+	method aplicar() {
+		victima.estadoDeCeguera().aplicar(self)
 	}
 	
-	method ralentizacion() = 30 + gravedad*10
-	
-	method aplicar() { victima.estadoDeCeguera().aplicar(self) }
-	
-	method comenzar()
-	{
-		victima.modificarPresicion(-gravedad*10)
+	method comenzar() {
+		victima.modificarPresicion((-gravedad) * 10)
 		victima.ceguera(self)
 		victima.estadoDeCeguera(tieneEstadoAlterado)
 		
@@ -285,28 +281,24 @@ class Ceguera inherits EstadoAlterado
 		game.addVisual(animacion)
 	}
 	
-	method reAplicar()
-	{
+	method reAplicar() {
 		const cegueraAnterior = victima.ceguera()
 		
 		cegueraAnterior.reiniciarDuracion()
 		cegueraAnterior.aumentarGravedad(gravedad)
 	}
 	
-	method terminar()
-	{
+	method terminar() {
 		efecto.interrumpir()
-		victima.modificarPresicion(gravedad*10)
+		victima.modificarPresicion(gravedad * 10)
 		victima.ceguera(null)
 		victima.estadoDeCeguera(noTieneEstadoAlterado)
 		
 		game.removeVisual(animacion)
 	}
 	
-	override method aumentarGravedad(n)
-	{
+	override method aumentarGravedad(n) {
 		super(n)
-		victima.modificarPresicion(-n*10)
+		victima.modificarPresicion((-n) * 10)
 	}
 }
-

@@ -1,21 +1,27 @@
 import wollok.game.*
+import pantalla.*
 import interfaz.*
 import items.recursos.*
 
-object inventarioDeRecursos
-{	
-	const posicion = game.at(game.width()-2, 2)
+object inventarioDeRecursos {
+	const posicion = game.at(pantalla.ancho() - 2, 2)
 	
-	method generar()
-	{
-		new CasillaRecurso(madera).ubicarEn(game.at(posicion.x(), posicion.y()))
-		new CasillaRecurso(piedra).ubicarEn(game.at(posicion.x() + 1, posicion.y()))
-		new CasillaRecurso(hierro).ubicarEn(game.at(posicion.x(), posicion.y() - 1))
-		new CasillaRecurso(oro).ubicarEn(game.at(posicion.x() + 1, posicion.y() - 1))
+	method generar() {
+		new CasillaRecurso(recurso = madera).ubicarEn(
+			game.at(posicion.x(), posicion.y())
+		)
+		new CasillaRecurso(recurso = piedra).ubicarEn(
+			game.at(posicion.x() + 1, posicion.y())
+		)
+		new CasillaRecurso(recurso = hierro).ubicarEn(
+			game.at(posicion.x(), posicion.y() - 1)
+		)
+		new CasillaRecurso(recurso = oro).ubicarEn(
+			game.at(posicion.x() + 1, posicion.y() - 1)
+		)
 	}
 	
-	method reiniciarRecursos()
-	{
+	method reiniciarRecursos() {
 		madera.reiniciar()
 		piedra.reiniciar()
 		hierro.reiniciar()
@@ -23,14 +29,8 @@ object inventarioDeRecursos
 	}
 }
 
-class CasillaRecurso inherits CasillaDeInventarioEnInterfaz
-{
-	const recurso
-	
-	constructor(_recurso)
-	{
-		recurso = _recurso
-	}
+class CasillaRecurso inherits CasillaDeInventarioEnInterfaz {
+	const property recurso
 	
 	override method itemEnCasilla() = recurso
 }

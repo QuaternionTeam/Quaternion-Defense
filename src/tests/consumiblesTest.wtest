@@ -1,0 +1,36 @@
+import personajes.sobrevivientes.*
+import items.consumibles.*
+
+describe "Hierba Verde" {
+	const hierbaVerde = new HierbaVerde(cantidad = 5)
+	
+	method initialize() {
+		betty.inicializar()
+	}
+	
+	test "La Hierba Verde cura 15% de vida a un sobreviviente" {
+		// Vida maxima de Betty = 100 + 27 = 127
+		betty.sufrirDanio(50, betty) // 127 - 50 = 77
+		hierbaVerde.consumir(betty) // + 15% de 127 (19.05) -> 97 (redondeado)
+		
+		assert.equals(97, betty.vidaActual())
+	}
+	
+	test "La La cantidad de Hierba Verde se reduce en uno cada vez que se consume" {
+		hierbaVerde.consumir(betty)
+		assert.equals(4, hierbaVerde.cantidad())
+		
+		hierbaVerde.consumir(betty)
+		assert.equals(3, hierbaVerde.cantidad())
+	}
+	
+	test "La cantidad Hierba Verde aumenta en la cantidad agregada" {
+		hierbaVerde.agregar(3)
+		assert.equals(8, hierbaVerde.cantidad())
+	}
+	
+	test "Una Hierba Verde es el mismo item que otra hierba verde con diferente cantidad" {
+		const otraHierbaVerde = new HierbaVerde(cantidad = 2)
+		assert.that(hierbaVerde.esMismoItem(otraHierbaVerde))
+	}
+}

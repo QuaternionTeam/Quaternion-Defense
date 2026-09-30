@@ -37,12 +37,12 @@ describe "Obtener Posicion"
 	}
 	test "Diagonal"
 	{
-		var diagonal = new Diagonal(arriba, derecha)
+		const diagonal = new Diagonal(horizontal = arriba, vertical = derecha)
 		assert.equals(game.at(2,2), diagonal.posicion(game.at(1,1)))
 	}
 	test "Diagonal n veces"
 	{
-		var diagonal = new Diagonal(arriba, derecha)
+		const diagonal = new Diagonal(horizontal = arriba, vertical = derecha)
 		assert.equals(game.at(4,4), diagonal.posicion(game.at(1,1), 3))
 	}
 }
@@ -66,8 +66,8 @@ describe "Direccion Opuesta"
 	}
 	test "Diagonal"
 	{
-		var diagonal = new Diagonal(arriba, derecha)
-		var opuesta = new Diagonal(abajo, izquierda)
+		const diagonal = new Diagonal(horizontal = arriba, vertical = derecha)
+		const opuesta = new Diagonal(horizontal = abajo, vertical = izquierda)
 		assert.equals(opuesta, diagonal.opuesta())
 	}
 }
@@ -75,28 +75,28 @@ describe "Direcciones Ortogonales"
 {
 	test "Arriba"
 	{
-		var ortogonales = [izquierda, derecha]	
+		const ortogonales = [izquierda, derecha]	
 		assert.equals(ortogonales, arriba.ortogonales())
 	}
 	test "Abajo"
 	{
-		var ortogonales = [izquierda, derecha]
+		const ortogonales = [izquierda, derecha]
 		assert.equals(ortogonales, abajo.ortogonales())
 	}
 	test "Izquierda"
 	{
-		var ortogonales = [abajo, arriba]
+		const ortogonales = [abajo, arriba]
 		assert.equals(ortogonales, izquierda.ortogonales())
 	}
 	test "Derecha"
 	{
-		var ortogonales = [abajo, arriba]
+		const ortogonales = [abajo, arriba]
 		assert.equals(ortogonales, derecha.ortogonales())
 	}
 	test "Diagonal"
 	{
-		var diagonal = new Diagonal(arriba, derecha)
-		var ortogonales = [new Diagonal(arriba, izquierda), new Diagonal(abajo, derecha)]
+		const diagonal = new Diagonal(horizontal = arriba, vertical = derecha)
+		const ortogonales = [new Diagonal(horizontal = arriba, vertical = izquierda), new Diagonal(horizontal = abajo, vertical = derecha)]
 		assert.equals(ortogonales, diagonal.ortogonales())
 	}
 }

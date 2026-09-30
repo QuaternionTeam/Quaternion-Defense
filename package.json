@@ -5,6 +5,7 @@
   "wollokVersion": "4.3.0",
   "author": "Quaternion Team",
   "license": "ISC",
+  "packageManager": "pnpm@11.8.0",
   "scripts": {
     "lint": "wollok lint -p ./src",
     "test": "wollok test -p ./src",

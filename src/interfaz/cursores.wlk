@@ -17,7 +17,7 @@ class Cursor inherits ObjetoEnJuego {
 }
 
 object cursorItemACombinar inherits Cursor {
-	override method image() = "assets/Interfaz/Cursores/Cursor_Item_A_Combinar.png"
+	override method image() = "Interfaz/Cursores/Cursor_Item_A_Combinar.png"
 }
 
 object cursorSobrevivienteSeleccionado inherits ImagenEnlazada (
@@ -33,7 +33,7 @@ object cursorSobrevivienteSeleccionado inherits ImagenEnlazada (
 	
 	override method objetoEnlazado() = escenario.sobrevivienteSeleccionado()
 	
-	override method image() = "assets/Interfaz/Cursores/Cursor_Sobreviviente_Seleccionado.png"
+	override method image() = "Interfaz/Cursores/Cursor_Sobreviviente_Seleccionado.png"
 }
 
 object cursorDeInventario inherits Cursor (position = game.at(game.width() - 2, game.height() - 2)) {
@@ -72,5 +72,5 @@ object cursorDeInventario inherits Cursor (position = game.at(game.width() - 2, 
 		self.mover(position.right(1))
 	}
 	
-	override method image() = "assets/Interfaz/Cursores/Cursor_Inventario.png"
+	override method image() = "Interfaz/Cursores/Cursor_Inventario.png"
 }

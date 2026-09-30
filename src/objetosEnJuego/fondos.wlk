@@ -72,7 +72,7 @@ class Suelo {
 }
 
 object tierra inherits Suelo {
-	method image() = "assets/Terreno/Suelo/Transparente.png"
+	method image() = "Terreno/Suelo/Transparente.png"
 }
 
 class Fuego inherits Elemento {
@@ -95,19 +95,19 @@ class Fuego inherits Elemento {
 }
 
 object pasto inherits Suelo {
-	method image() = "assets/Terreno/Suelo/Pasto.png"
+	method image() = "Terreno/Suelo/Pasto.png"
 }
 
 object arena inherits Suelo {
-	method image() = "assets/Terreno/Suelo/Arena.png"
+	method image() = "Terreno/Suelo/Arena.png"
 }
 
 object nieve inherits Suelo {
-	method image() = "assets/Terreno/Suelo/Nieve.png"
+	method image() = "Terreno/Suelo/Nieve.png"
 }
 
 object agua inherits Suelo {
-	method image() = "assets/Terreno/Suelo/Agua.png"
+	method image() = "Terreno/Suelo/Agua.png"
 	
 	override method esAtravesable() = false
 	
@@ -141,7 +141,7 @@ class FondoBordeConSuelo inherits ObjetoEnJuego {
 
 class FondoInterfaz inherits ObjetoEnJuego {
 	const property imagen
-	const property image = ("assets/Interfaz/Marco/" + imagen) + ".png"
+	const property image = ("Interfaz/Marco/" + imagen) + ".png"
 	var property position = game.origin()
 	
 	method convertirEn(nuevoSuelo) {

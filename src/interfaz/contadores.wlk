@@ -7,7 +7,7 @@ class CasillaNumerica {
 	
 	method nombreDeArchivo()
 	
-	method image() = ("assets/Interfaz/Digitos/" + self.nombreDeArchivo()) + ".png"
+	method image() = ("Interfaz/Digitos/" + self.nombreDeArchivo()) + ".png"
 	
 	method obtenerNumeroComoString() = objetoConNumero.numeroAMostrar().truncate(
 		0

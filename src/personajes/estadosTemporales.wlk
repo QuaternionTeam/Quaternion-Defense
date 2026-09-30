@@ -257,7 +257,7 @@ class Ceguera inherits EstadoAlterado {
 	
 	override method animacionInicial() = new ImagenEnlazada(
 		objetoEnlazado = victima,
-		image = "assets/EstadosAlterados/Ceguera.png"
+		image = "EstadosAlterados/Ceguera.png"
 	)
 	
 	override method efectoInicial() = new EventoSimple(

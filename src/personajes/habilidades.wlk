@@ -178,7 +178,7 @@ class AtaqueRapido inherits HabilidadActiva
 			super()
 		}
 		else
-			sonido.reproducirWav("Habilidad_En_Enfriamiento")
+			sonido.reproducir("Habilidad_En_Enfriamiento.wav")
 	}
 	
 	override method efectoDeActivacion()
@@ -434,8 +434,6 @@ class ResurreccionIndividual
 	{
 		usuario.escenario().sobrevivientes().filter{ sobreviviente => sobreviviente.estaDerribado() }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
 	}
-
-	method image() = "Habilidades/Revivir.png"
 }
 
 object revivirNormal inherits ResurreccionIndividual
@@ -843,7 +841,7 @@ class Aceleracion inherits HabilidadDeCambioDeEstadistica
 
 class Presicion inherits HabilidadDeCambioDeEstadistica
 {
-	override method nombreHabilidad() = "Presicion"
+	override method nombreHabilidad() = "Precision"
 	
 	override method efectoAlEquipar()
 	{
@@ -888,7 +886,7 @@ class Critico inherits HabilidadDeCambioDeEstadistica
 
 class DanioCritico inherits HabilidadDeCambioDeEstadistica
 {
-	override method nombreHabilidad() = "Daño Critico"
+	override method nombreHabilidad() = "Danio_Critico"
 	
 	override method efectoAlEquipar()
 	{

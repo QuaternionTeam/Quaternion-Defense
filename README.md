@@ -1,5 +1,7 @@
 # Quaternion Defense
 
+[![Build Status](https://github.com/wollok/pepitaGame/actions/workflows/ci.yml/badge.svg)](https://github.com/wollok/pepitaGame/actions/workflows/ci.yml)
+
 ![capturaJuego](docs/capturaJuego.png)
 
 ## Desarrolladores

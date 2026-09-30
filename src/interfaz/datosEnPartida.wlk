@@ -2,39 +2,62 @@ import wollok.game.*
 import escenario.*
 import contadores.*
 
-object textoDeNivel 
-{
-	const posicion = game.at(1, game.height()-1)
+object textoDeNivel {
+	const posicion = game.at(1, game.height() - 1)
 	
-	method ubicar()
-	{
-		var posicionDeAlLado = game.at(posicion.x()+2, posicion.y())
+	method position() = posicion
+	
+	method ubicar() {
+		var posicionDeAlLado = game.at(posicion.x() + 2, posicion.y())
 		
-		game.addVisualIn(self, posicion)
-		game.addVisualIn(new DosDigitos_Unidad(escenario, mostrarUltimoCero), posicionDeAlLado)
-		game.addVisualIn(new DosDigitos_Decena(escenario, mostrarUltimoCero), posicionDeAlLado)
+		game.addVisual(self)
+		game.addVisual(
+			new DosDigitos_Unidad(
+				objetoConNumero = escenario,
+				comportamientoDeCero = mostrarUltimoCero,
+				position = posicionDeAlLado
+			)
+		)
+		game.addVisual(
+			new DosDigitos_Decena(
+				objetoConNumero = escenario,
+				comportamientoDeCero = mostrarUltimoCero,
+				position = posicionDeAlLado
+			)
+		)
 	}
 	
 	method image() = "assets/Interfaz/DatosEnPartida/Nivel.png"
 }
 
-object textoDeExperiencia
-{
-	const posicion = game.at(13, game.height()-1)
+object textoDeExperiencia {
+	const posicion = game.at(13, game.height() - 1)
 	
-	method ubicar()
-	{
-		var posicionDeAlLado = game.at(posicion.x()+1, posicion.y())
+	method position() = posicion
+	
+	method ubicar() {
+		var posicionDeAlLado = game.at(posicion.x() + 1, posicion.y())
 		
-		game.addVisualIn(self, posicion)
-		game.addVisualIn(new DosDigitos_Unidad(nivelDeSobrevivienteSeleccinoado, mostrarUltimoCero), posicionDeAlLado)
-		game.addVisualIn(new DosDigitos_Decena(nivelDeSobrevivienteSeleccinoado, mostrarUltimoCero), posicionDeAlLado)
+		game.addVisual(self)
+		game.addVisual(
+			new DosDigitos_Unidad(
+				objetoConNumero = nivelDeSobrevivienteSeleccinoado,
+				comportamientoDeCero = mostrarUltimoCero,
+				position = posicionDeAlLado
+			)
+		)
+		game.addVisual(
+			new DosDigitos_Decena(
+				objetoConNumero = nivelDeSobrevivienteSeleccinoado,
+				comportamientoDeCero = mostrarUltimoCero,
+				position = posicionDeAlLado
+			)
+		)
 	}
 	
 	method image() = "assets/Interfaz/DatosEnPartida/Exp.png"
 }
 
-object nivelDeSobrevivienteSeleccinoado
-{
+object nivelDeSobrevivienteSeleccinoado {
 	method numeroAMostrar() = escenario.sobrevivienteSeleccionado().nivel()
 }

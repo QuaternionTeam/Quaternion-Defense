@@ -1,27 +1,16 @@
 import wollok.game.*
-import objetosEnJuego.objetosEnJuego.*
+import objetosEnJuego.*
 
 import eventos.*
-import escenario.*
 import probabilidad.*
 
 class Proyectil inherits ObjetoEnJuego 
 {
 	const property tirador
-	const property direccion
-	var property position
-	const disparo
-	const danio
-	
-	constructor(_tirador, _danio)
-	{
-		tirador = _tirador
-		direccion = tirador.orientacion()
-		position = tirador.position()
-		danio = _danio
-		
-		disparo = new EventoPeriodico(eventos02Segundos, 0.2, { self.avanzarSiEsPosible() })
-	}
+	const property direccion = tirador.orientacion()
+	var property position = tirador.position()
+	const property danio
+	const property disparo = new EventoPeriodico(lista = eventos02Segundos, periodo = 0.2, accion = { self.avanzarSiEsPosible() })
 	
 	method objetivo() = game.colliders(self).last()
 
@@ -35,10 +24,10 @@ class Proyectil inherits ObjetoEnJuego
 	
 	method avanzarSiEsPosible()
 	{
-		if(escenario.estaDentro(self.direccionAAvanzar()))
+		if(tirador.escenario().estaDentro(self.direccionAAvanzar()))
 		{
 			self.avanzar()
-			if(not escenario.esAtravesable(self.position()))
+			if(not tirador.escenario().esAtravesable(self.position()))
 				self.impactar()
 		}
 			

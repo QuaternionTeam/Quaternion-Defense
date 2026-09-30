@@ -1,37 +1,31 @@
 import wollok.game.*
-import objetosEnJuego.objetosEnJuego.*
+import objetosEnJuego.*
 import eventos.*
 import escenario.*
 
-class Drop inherits ObjetoEnJuego
-{
-	const item
-	const fondo
-	const tiempo
+class Drop inherits ObjetoEnJuego {
+	const property item
+	const property position
+	const property fondo = escenario.fondo(position)
+	const property tiempo = new EventoSimple(
+		lista = eventos1Segundo,
+		demora = 10,
+		accion = { self.desaparecer() }
+	)
 	
-	constructor(_item, _position)
-	{
-		item = _item
-		fondo = escenario.fondo(_position)
-		tiempo = new EventoSimple(eventos1Segundo, 10, { self.desaparecer() })
-	}
-	
-	method serAgarrado()
-	{
+	method serAgarrado() {
 		item.agregarAInventario()
 		self.desaparecer()
 	}
 	
-	method aparecer()
-	{
-		game.addVisualIn(self, fondo.posicion())
+	method aparecer() {
+		game.addVisual(self)
 		tiempo.comenzar()
 		
 		fondo.agregarDrop(self)
 	}
 	
-	method desaparecer() 
-	{ 
+	method desaparecer() {
 		tiempo.interrumpir()
 		fondo.removerDrop()
 		game.removeVisual(self)

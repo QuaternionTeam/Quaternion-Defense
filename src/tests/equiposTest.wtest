@@ -11,7 +11,7 @@ describe "Armas"
 	var mano = new Manos()
 	var arco = new Arco()
 	
-	fixture
+	method initialize()
 	{
 		betty.position(game.at(1,1))
 		enemigo.position(game.at(2,2))

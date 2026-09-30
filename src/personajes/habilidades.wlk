@@ -3,14 +3,8 @@ import wollok.game.*
 import objetosEnJuego.elementos.*
 import objetosEnJuego.proyectiles.*
 
-import interfaz.mensaje.*
-
-import sonidos.*
-import escenario.*
 import sonidos.*
 import eventos.*
-import personajes.personajes.*
-import personajes.sobrevivientes.*
 
 /******************** Habilidades ********************/
 class Habilidad
@@ -45,7 +39,7 @@ class Habilidad
 		self.deshabilitar()
 		self.efectoAlComenzarEnfriamiento()
 		
-		enfriamiento = new EventoPeriodicoTemporal(eventos1Segundo, self.timepoDeEnfriamientoFinal(), 1, {}, { self.termianarEnfriamiento() })
+		enfriamiento = new EventoPeriodicoTemporal(lista = eventos1Segundo, duracion = self.timepoDeEnfriamientoFinal(), periodo = 1, accion = {}, accionAlTerminar = { self.termianarEnfriamiento() })
 		enfriamiento.comenzar()
 	}
 	
@@ -162,7 +156,7 @@ class ChispaFinal inherits HabilidadActiva
 				10.times{
 					num =>
 					var centro = sentido.posicion(usuario.position(), num)
-					new Rayo(usuario).activarEn(centro)
+					new Rayo(iniciador = usuario).activarEn(centro)
 				}	
 			}
 		)	
@@ -316,7 +310,7 @@ class Regeneracion inherits HabilidadActiva
 	
 	override method efectoDeActivacion()
 	{
-		regeneracion = new EventoPeriodicoTemporal(eventos1Segundo, self.duracion(), 2, { usuario.curar(usuario.porcentajeDeVidaMaxima(self.porcentaje())) }) 
+		regeneracion = new EventoPeriodicoTemporal(lista = eventos1Segundo, duracion = self.duracion(), periodo = 2, accion = { usuario.curar(usuario.porcentajeDeVidaMaxima(self.porcentaje())) })
 		
 		regeneracion.comenzar()
 	}
@@ -406,12 +400,7 @@ object curaMasMas
 /******************** Revivir ********************/
 class Revivir inherits HabilidadActiva
 {	
-	const categoria
-	
-	constructor(_categoria)
-	{
-		categoria = _categoria
-	}
+	const property categoria
 	
 	override method nombre() = "Revivir" + categoria.sufijo()
 	
@@ -419,8 +408,7 @@ class Revivir inherits HabilidadActiva
 	
 	override method activar()
 	{
-		// Solo puede activarse si hay sobrevivientes derribados
-		if(not escenario.sobrevivientes().filter{ sobreviviente => sobreviviente.estado() == derribado }.isEmpty())
+		if(usuario.escenario().sobrevivientes().any{ sobreviviente => sobreviviente.estaDerribado() })
 			super()
 		else
 			sonido.reproducir("Habilidad_En_Enfriamiento.wav")
@@ -444,7 +432,7 @@ class ResurreccionIndividual
 	
 	method efectoDeActivacion(usuario, nivelHabilidad)
 	{
-		escenario.sobrevivientes().filter{ sobreviviente => sobreviviente.estado() == derribado }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
+		usuario.escenario().sobrevivientes().filter{ sobreviviente => sobreviviente.estado() == derribado }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
 	}
 
 	method image() = "assets/Habilidades/Revivir.png"
@@ -476,7 +464,7 @@ object revivirMasMas
 	
 	method efectoDeActivacion(usuario, nivelHabilidad)
 	{
-		escenario.sobrevivientes().forEach{ sobreviviente => sobreviviente.revivir(usuario.porcentajeDeVidaMaxima(20*nivelHabilidad)) }
+		usuario.escenario().sobrevivientes().forEach{ sobreviviente => sobreviviente.revivir(usuario.porcentajeDeVidaMaxima(20*nivelHabilidad)) }
 	}
 	
 	method coste() = 3
@@ -496,26 +484,26 @@ class Flechazo inherits HabilidadActiva
 class FlechazoSimple inherits Flechazo
 {	
 	override method nombre() = "Flechazo_Simple"
-	override method flecha() = new FlechaSimple(usuario, self.danio())
+	override method flecha() = new FlechaSimple(tirador = usuario, danio = self.danio())
 	override method coste() = 0
 }
 
 class FlechazoIgneo inherits Flechazo
 {	
 	override method nombre() = "Flechazo_Igneo"
-	override method flecha() = new FlechaIgnea(usuario, self.danio()) 
+	override method flecha() = new FlechaIgnea(tirador = usuario, danio = self.danio())
 }
 
 class FlechazoGelido inherits Flechazo
 {	
 	override method nombre() = "Flechazo_Gelido"
-	override method flecha() = new FlechaGelida(usuario, self.danio()) 
+	override method flecha() = new FlechaGelida(tirador = usuario, danio = self.danio())
 }
 
 class FlechazoOscuro inherits FlechazoSimple
 {	
 	override method nombre() = "Flechazo_Oscuro"
-	override method flecha() = new FlechaOscura(usuario, self.danio()) 
+	override method flecha() = new FlechaOscura(tirador = usuario, danio = self.danio())
 }
 
 class FlechazoPerforante inherits FlechazoSimple
@@ -523,7 +511,7 @@ class FlechazoPerforante inherits FlechazoSimple
 	override method nombre() = "Flechazo_Perforante"
 	override method multiplicadorDeNivel() = 0.2
 	override method tiempoDeEnfriamiento() = 27 - self.nivel()
-	override method flecha() = new FlechaPerforante(usuario, self.danio())
+	override method flecha() = new FlechaPerforante(tirador = usuario, danio = self.danio())
 	override method coste() = 2
 }
 
@@ -575,7 +563,7 @@ class CocktailMolotov inherits HabilidadActiva
 	{
 		const sentido = usuario.orientacion()
 		
-		const efecto = new EventoSimple(eventos02Segundos, 0.2, 
+		const efecto = new EventoSimple(lista = eventos02Segundos, demora = 0.2, accion =
 		{
 			var sonidoConjunto = new SonidoConjunto();
 			
@@ -588,9 +576,9 @@ class CocktailMolotov inherits HabilidadActiva
 				const ortogonal1 = sentido.ortogonales().first().posicion(centro)
 				const ortogonal2 = sentido.ortogonales().last().posicion(centro)
 				
-				escenario.fondo(centro).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
-				escenario.fondo(ortogonal1).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
-				escenario.fondo(ortogonal2).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
+				usuario.escenario().fondo(centro).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
+				usuario.escenario().fondo(ortogonal1).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
+				usuario.escenario().fondo(ortogonal2).encenderFuego(usuario, self.gravedad(), sonidoConjunto)
 			}		
 		})
 		
@@ -598,15 +586,15 @@ class CocktailMolotov inherits HabilidadActiva
 	}
 }
 
-object oracion inherits HabilidadActiva(usuario = moldor)
+class Oracion inherits HabilidadActiva
 {	
-	method modo() = moldor.modo().oracion()
+	method modo() = usuario.modo().oracion()
 	
 	override method tiempoDeEnfriamiento() = 30 - 2 * self.nivel()
 		
 	override method nombre() = self.modo().nombre()
 	
-	override method efectoDeActivacion() { self.modo().efectoDeActivacion() }
+	override method efectoDeActivacion() { self.modo().efectoDeActivacion(usuario) }
 	
 	override method coste() = 2
 }
@@ -615,32 +603,32 @@ object bendicion
 {
 	method nombre() = "Bendicion"
 	
-	method efectoDeActivacion()
+	method efectoDeActivacion(usuario)
 	{
-		escenario.sobrevivientes().forEach{ sobreviviente =>  sobreviviente.curar(sobreviviente.porcentajeDeVidaMaxima(10 + moldor.nivel()*5)) }
+		usuario.escenario().sobrevivientes().forEach{ sobreviviente =>  sobreviviente.curar(sobreviviente.porcentajeDeVidaMaxima(10 + usuario.nivel()*5)) }
 	}
 }
 object maldicion
 {
 	method nombre() = "Maldicion"
 	
-	method efectoDeActivacion()
+	method efectoDeActivacion(usuario)
 	{
-		escenario.enemigos().forEach{ enemigo =>  enemigo.recibirAtaqueDeHabilidad(enemigo.porcentajeDeVidaMaxima(20 + moldor.nivel()*10), moldor) }
+		usuario.escenario().enemigos().forEach{ enemigo =>  enemigo.recibirAtaqueDeHabilidad(enemigo.porcentajeDeVidaMaxima(20 + usuario.nivel()*10), usuario) }
 	}
 }
 
-object cambioDeEnergias inherits HabilidadActiva(usuario = moldor)
+class CambioDeEnergias inherits HabilidadActiva
 {
 	override method tiempoDeEnfriamiento() = 8 - self.nivel()
 	
 	override method nombre() = "Cambio_De_Energias"
 	
-	override method efectoDeActivacion() { moldor.cambiarModo()	}
+	override method efectoDeActivacion() { usuario.cambiarModo()	}
 	
 	override method coste() = 0
 	
-	override method image() = "assets/Habilidades/" + moldor.modo().modoOpuesto().energia() + "_" + estado.nombre() + ".png"
+	override method image() = "assets/Habilidades/" + usuario.modo().modoOpuesto().energia() + "_" + estado.nombre() + ".png"
 }
 
 /******************** PASIVAS ********************/
@@ -932,17 +920,17 @@ class Despiadado inherits HabilidadDeCambioDeEstadistica
 	override method coste() = estadistica.coste()*2
 }
 
-object enteInterno inherits HabilidadActiva(usuario = moldor)
+class EnteInterno inherits HabilidadActiva
 {	
 	var property modo = angelInterno
 	
-	method cambiarModo() { modo.cambiarModo() }
+	method cambiarModo() { modo.cambiarModo(usuario, self) }
 		
 	override method nombre() = self.modo().nombre()
 	
-	override method efectoAlEquipar() { self.modo().efectoAlEquipar() }
+	override method efectoAlEquipar() { self.modo().efectoAlEquipar(usuario) }
 	
-	override method efectoAlDesequipar() { self.modo().efectoAlDesequipar() }
+	override method efectoAlDesequipar() { self.modo().efectoAlDesequipar(usuario) }
 
 	override method coste() = 2
 }
@@ -951,23 +939,23 @@ object angelInterno
 {
 	method nombre() = "Angel_Interno"
 	
-	method efectoAlEquipar() 
+	method efectoAlEquipar(usuario) 
 	{ 
-		moldor.modificarMultiplicadorDeDanioRecibido(-7*moldor.nivel())
-		moldor.modificarMultiplicadorDeAtaque(-7*moldor.nivel())
+		usuario.modificarMultiplicadorDeDanioRecibido(-7*usuario.nivel())
+		usuario.modificarMultiplicadorDeAtaque(-7*usuario.nivel())
 	}
 	
-	method efectoAlDesequipar() 
+	method efectoAlDesequipar(usuario) 
 	{
-		moldor.modificarMultiplicadorDeDanioRecibido(7*moldor.nivel())
-		moldor.modificarMultiplicadorDeAtaque(7*moldor.nivel())
+		usuario.modificarMultiplicadorDeDanioRecibido(7*usuario.nivel())
+		usuario.modificarMultiplicadorDeAtaque(7*usuario.nivel())
 	}
 	
-	method cambiarModo() 
+	method cambiarModo(usuario, enteInterno) 
 	{ 
 		enteInterno.modo(demonioInterno)
-		self.efectoAlDesequipar()
-		demonioInterno.efectoAlEquipar()
+		self.efectoAlDesequipar(usuario)
+		demonioInterno.efectoAlEquipar(usuario)
 	}
 }
 
@@ -975,23 +963,23 @@ object demonioInterno
 {
 	method nombre() = "Demonio_Interno"
 	
-	method efectoAlEquipar() 
+	method efectoAlEquipar(usuario) 
 	{ 
-		moldor.modificarMultiplicadorDeDanioRecibido(7*moldor.nivel())
-		moldor.modificarMultiplicadorDeAtaque(7*moldor.nivel())
+		usuario.modificarMultiplicadorDeDanioRecibido(7*usuario.nivel())
+		usuario.modificarMultiplicadorDeAtaque(7*usuario.nivel())
 	}
 	
-	method efectoAlDesequipar() 
+	method efectoAlDesequipar(usuario) 
 	{
-		moldor.modificarMultiplicadorDeDanioRecibido(-7*moldor.nivel())
-		moldor.modificarMultiplicadorDeAtaque(-7*moldor.nivel())
+		usuario.modificarMultiplicadorDeDanioRecibido(-7*usuario.nivel())
+		usuario.modificarMultiplicadorDeAtaque(-7*usuario.nivel())
 	}
 	
-	method cambiarModo() 
+	method cambiarModo(usuario, enteInterno) 
 	{ 
 		enteInterno.modo(angelInterno)
-		self.efectoAlDesequipar()
-		angelInterno.efectoAlEquipar()
+		self.efectoAlDesequipar(usuario)
+		angelInterno.efectoAlEquipar(usuario)
 	}
 }
 

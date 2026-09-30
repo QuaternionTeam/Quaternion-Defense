@@ -1,61 +1,54 @@
 import wollok.game.*
 import eventos.*
 
-object sonido 
-{
+object sonido {
 	var estado = sonidoDesactivado
 	
-	method cambiarEstado(nuevoEstado)
-	{
-		estado = nuevoEstado		
+	method cambiarEstado(nuevoEstado) {
+		estado = nuevoEstado
 	}
 	
-	method reproducir(audio)
-	{
+	method reproducir(audio) {
 		estado.reproducir(audio)
 	}
 }
-object sonidoActivado
-{
-	method reproducir(audio)
-	{
+
+object sonidoActivado {
+	method reproducir(audio) {
 		game.sound("assets/Sonidos/" + audio)
 	}
 }
-object sonidoDesactivado
-{
-	method reproducir(audio) {}
+
+object sonidoDesactivado {
+	method reproducir(audio) {
+		
+	}
 }
 
-class SonidoEnBucle
-{
-	const eventoDeAudio
+class SonidoEnBucle {
+	const property audio
+	const property duracion
+	const property eventoDeAudio = new EventoPeriodico(
+		lista = eventos02Segundos,
+		periodo = duracion,
+		accion = { sonido.reproducir(audio) }
+	)
 	
-	constructor(audio, duracion)
-	{
-		eventoDeAudio = new EventoPeriodico(eventos02Segundos, duracion, {sonido.reproducir(audio)})
-	}
-	
-	method reproducir()
-	{
+	method reproducir() {
 		eventoDeAudio.ejecutar()
 		eventoDeAudio.comenzar()
 	}
 	
-	method detener()
-	{
+	method detener() {
 		eventoDeAudio.interrumpir()
 	}
 }
 
-class SonidoConjunto
-{
+class SonidoConjunto {
 	var reproduciendo = false
-		
-	method reproducir(audio)
-	{
-		if (not reproduciendo)
-		{
+	
+	method reproducir(audio) {
+		if (not reproduciendo) {
 			sonido.reproducir(audio)
 			reproduciendo = true
 		}

@@ -3,12 +3,12 @@ import items.equipos.*
 
 describe "Inventario de Sobreviviente"
 {
-	var arma = new EspadaDeEntrenamiento()
+	const arma = new EspadaDeEntrenamiento()
 	
-	var cascoTest = new CascoTest()
-	var pecheraTest = new PecheraTest()
-	var pantalonesTest = new PantalonesTest()
-	var botasTest = new BotasTest()
+	const cascoTest = new CascoTest()
+	const pecheraTest = new PecheraTest()
+	const pantalonesTest = new PantalonesTest()
+	const botasTest = new BotasTest()
 	
 	test "Los equipos de mano se equipan en la mano derecha de los sobrevivientes por default" 
 	{
@@ -32,7 +32,7 @@ describe "Inventario de Sobreviviente"
 		pantalonesTest.equiparEn(betty)
 		botasTest.equiparEn(betty)
 		
-		var defensaEsperada = betty.defensaBase()+betty.defensaPorNivel()*betty.nivel()+cascoTest.defensa()+pecheraTest.defensa()+pantalonesTest.defensa()+botasTest.defensa()
+		const defensaEsperada = betty.defensaBase()+betty.defensaPorNivel()*betty.nivel()+cascoTest.defensa()+pecheraTest.defensa()+pantalonesTest.defensa()+botasTest.defensa()
 		
 		assert.equals(defensaEsperada, betty.defensa())
 	}

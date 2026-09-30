@@ -2,7 +2,7 @@ import personajes.sobrevivientes.*
 import items.consumibles.*
 
 describe "Hierba Verde" {
-	var hierbaVerde = new HierbaVerde(cantidad = 5)
+	const hierbaVerde = new HierbaVerde(cantidad = 5)
 	
 	method initialize() {
 		betty.inicializar()
@@ -30,7 +30,7 @@ describe "Hierba Verde" {
 	}
 	
 	test "Una Hierba Verde es el mismo item que otra hierba verde con diferente cantidad" {
-		var otraHierbaVerde = new HierbaVerde(cantidad = 2)
+		const otraHierbaVerde = new HierbaVerde(cantidad = 2)
 		assert.that(hierbaVerde.esMismoItem(otraHierbaVerde))
 	}
 }

@@ -7,9 +7,9 @@ import personajes.personajes.*
 
 describe "Armas"
 {
-	var enemigo = new ZombieTipo1() 
-	var mano = new Manos()
-	var arco = new Arco()
+	const enemigo = new ZombieTipo1() 
+	const mano = new Manos()
+	const arco = new Arco()
 	
 	method initialize()
 	{

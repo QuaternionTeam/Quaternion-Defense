@@ -17,35 +17,35 @@ class Sobreviviente inherits Personaje {
 	var property pechera = items.ningunEquipo.ningunEquipo
 	var pantalonesActuales = null
 	var property botas = items.ningunEquipo.ningunEquipo
-	var ataquePorNivel
-	var defensaPorNivel
-	var vidaPorNivel
+	const ataquePorNivel
+	const defensaPorNivel
+	const vidaPorNivel
 	var nivel = 1
 	var experienciaActual = 0
 	const habilidadesActivasIniciales = [
-			new HabilidadActiva(),
-			new HabilidadActiva(),
-			new HabilidadActiva()
-		]
+		new HabilidadActiva(),
+		new HabilidadActiva(),
+		new HabilidadActiva()
+	]
 	const habilidadesPasivasIniciales = [
-			new HabilidadPasiva(),
-			new HabilidadPasiva(),
-			new HabilidadPasiva()
-		]
+		new HabilidadPasiva(),
+		new HabilidadPasiva(),
+		new HabilidadPasiva()
+	]
 	const habilidadesActivasAdicionales = [
-			new HabilidadActiva(),
-			new HabilidadActiva(),
-			new HabilidadActiva(),
-			new HabilidadActiva(),
-			new HabilidadActiva()
-		]
+		new HabilidadActiva(),
+		new HabilidadActiva(),
+		new HabilidadActiva(),
+		new HabilidadActiva(),
+		new HabilidadActiva()
+	]
 	const habilidadesPasivasAdicionales = [
-			new HabilidadPasiva(),
-			new HabilidadPasiva(),
-			new HabilidadPasiva(),
-			new HabilidadPasiva(),
-			new HabilidadPasiva()
-		]
+		new HabilidadPasiva(),
+		new HabilidadPasiva(),
+		new HabilidadPasiva(),
+		new HabilidadPasiva(),
+		new HabilidadPasiva()
+	]
 	var habilidadesActivas = []
 	var habilidadesPasivas = []
 	var objetoDeInteraccion = null
@@ -65,9 +65,7 @@ class Sobreviviente inherits Personaje {
 		pantalonesActuales = nuevosPantalones
 	}
 	
-	override method multiplicadorDeDanio() = 50
-	
-	method escenario() = escenario
+	method multiplicadorDeDanio() = 50
 	
 	// Suma de defensa del sobreviviente y la defensa de todos sus equipos
 	override method defensa() = (((((((defensa + (defensaPorNivel * nivel)) + arma.defensa()) + equipoDeMano.defensa()) + casco.defensa()) + pechera.defensa()) + self.pantalones().defensa()) + botas.defensa()) * self.multiplicadorDeDefensa()

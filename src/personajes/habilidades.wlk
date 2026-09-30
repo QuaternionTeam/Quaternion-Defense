@@ -10,7 +10,7 @@ import eventos.*
 class Habilidad
 {
 	var usuario = null
-	var position = null
+	const position = null
 	var enfriamiento = null
 	
 	var estado = habilidadNoDisponible

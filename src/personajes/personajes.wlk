@@ -12,7 +12,7 @@ class Personaje inherits ObjetoConVida {
 	// Estadisticas del personaje
 	var defensa = self.defensaInicial()
 	var ataque = self.ataqueInicial()
-	var ataquePerforante = 0
+	const ataquePerforante = 0
 	var multiplicadorDeDefensa = 100
 	var multiplicadorDeAtaque = 100
 	var multiplicadorDeDanioRecibido = 100
@@ -37,8 +37,8 @@ class Personaje inherits ObjetoConVida {
 	var property position = game.at(1, 1)
 	var property orientacion = abajo
 	// Listas de resurrecciones y estados alterados que puede tener un personaje
-	var resurrecciones = self.resurreccionesIniciales()
-	var estadosTemporales = new List() // Deberia ser un Set
+	const resurrecciones = self.resurreccionesIniciales()
+	const estadosTemporales = new List() // Deberia ser un Set
 	//Comportamientos
 	var property comportamientoDeMovimiento = normal
 	var comportamientoDeAtaque = ataqueHabilitado
@@ -172,7 +172,7 @@ class Personaje inherits ObjetoConVida {
 	
 	method esAtacable() = estado.esAtacable()
 	
-	method estaDerribado() = estado is derribado
+	method estaDerribado() = estado == derribado
 	
 	/******************** Daño ********************/
 	method constanteDeDanioRecibido() = constanteDeDanioRecibido

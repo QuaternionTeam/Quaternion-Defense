@@ -172,7 +172,7 @@ class Personaje inherits ObjetoConVida {
 	
 	method esAtacable() = estado.esAtacable()
 	
-	method estaDerribado() = estado == derribado
+	method estaDerribado() = estado is derribado
 	
 	/******************** Daño ********************/
 	method constanteDeDanioRecibido() = constanteDeDanioRecibido
@@ -427,7 +427,7 @@ object confundido {
 	}
 	
 	method moverHaciaSiEsPosible(personaje, direccion) {
-		var direccionOpuesta = direccion.opuesta()
+		const direccionOpuesta = direccion.opuesta()
 		if (escenario.esAtravesable(direccionOpuesta.posicion(personaje.position())))
 			self.moverHacia(personaje, direccion)
 		else personaje.orientacion(direccionOpuesta)

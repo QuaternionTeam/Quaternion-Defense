@@ -200,8 +200,8 @@ object listaDeRecetas {
 	}
 	
 	method combinar(ingredienteUno, ingredienteDos) {
-		var ingredientes = #{ingredienteUno, ingredienteDos}
-		var recetaDeCombinacion = self.recetas().filter(
+		const ingredientes = #{ingredienteUno, ingredienteDos}
+		const recetaDeCombinacion = self.recetas().filter(
 			{ receta => receta.ingredientes().all(
 					{ ingrediente => ingrediente.esMismoItem(
 							ingredienteUno

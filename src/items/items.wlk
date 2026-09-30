@@ -55,11 +55,11 @@ class ItemAcumulableLimitado inherits ItemAcumulable {
 	
 	override method agregar(cantidadAgregada) {
 		if ((cantidad + cantidadAgregada) > limite) {
-			var sobrante = cantidadAgregada - (limite - cantidad)
+			const sobrante = cantidadAgregada - (limite - cantidad)
 			
 			cantidad = limite
 			
-			var nuevoItem = self.nuevoYo()
+			const nuevoItem = self.nuevoYo()
 			
 			nuevoItem.agregarAInventario()
 			nuevoItem.agregar(sobrante - 1)

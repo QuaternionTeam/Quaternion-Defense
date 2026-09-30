@@ -39,17 +39,17 @@ class RecursoNecesario {
 }
 
 class MaderaNecesaria inherits RecursoNecesario {
-	override method esMismoItem(_madera) = _madera == madera
+	override method esMismoItem(_madera) = _madera is madera
 }
 
 class PiedraNecesaria inherits RecursoNecesario {
-	override method esMismoItem(_piedra) = _piedra == piedra
+	override method esMismoItem(_piedra) = _piedra is piedra
 }
 
 class OroNecesario inherits RecursoNecesario {
-	override method esMismoItem(_oro) = _oro == oro
+	override method esMismoItem(_oro) = _oro is oro
 }
 
 class HierroNecesario inherits RecursoNecesario {
-	override method esMismoItem(_hierro) = _hierro == hierro
+	override method esMismoItem(_hierro) = _hierro is hierro
 }

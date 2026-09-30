@@ -8,7 +8,7 @@ object textoDeNivel {
 	method position() = posicion
 	
 	method ubicar() {
-		var posicionDeAlLado = game.at(posicion.x() + 2, posicion.y())
+		const posicionDeAlLado = game.at(posicion.x() + 2, posicion.y())
 		
 		game.addVisual(self)
 		game.addVisual(
@@ -36,7 +36,7 @@ object textoDeExperiencia {
 	method position() = posicion
 	
 	method ubicar() {
-		var posicionDeAlLado = game.at(posicion.x() + 1, posicion.y())
+		const posicionDeAlLado = game.at(posicion.x() + 1, posicion.y())
 		
 		game.addVisual(self)
 		game.addVisual(

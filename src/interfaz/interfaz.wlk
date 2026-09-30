@@ -30,7 +30,7 @@ object interfaz {
 	}
 	
 	method crearCasillaMarcoInventario(x, y) {
-		var casillaInventario = new FondoInterfaz(imagen = "Interfaz_Marco", position = game.at(x, y))
+		const casillaInventario = new FondoInterfaz(imagen = "Interfaz_Marco", position = game.at(x, y))
 		game.addVisual(casillaInventario)
 	}
 	

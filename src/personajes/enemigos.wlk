@@ -88,11 +88,11 @@ class Enemigo inherits Personaje {
 	
 	method moverHaciaSobrevivienteCercano() {
 		if (not escenario.sobrevivientes().isEmpty()) {
-			var objetivo = self.obtenerSobrevivienteMasCercano()
+			const objetivo = self.obtenerSobrevivienteMasCercano()
 			
-			var direccionesAtravesables = self.direccionesAtravesables()
+			const direccionesAtravesables = self.direccionesAtravesables()
 			if (not direccionesAtravesables.isEmpty()) {
-				var direccionMasConveniente = self.direccionMasConveniente(
+				const direccionMasConveniente = self.direccionMasConveniente(
 					direccionesAtravesables,
 					objetivo
 				)

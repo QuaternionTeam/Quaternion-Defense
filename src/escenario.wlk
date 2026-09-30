@@ -303,7 +303,7 @@ object escenario {
 		const centro = self.posicionAleatoria()
 		self.fondo(centro).convertirEn(agua)
 		
-		var adyacentes = #{
+		const adyacentes = #{
 			centro.up(1),
 			centro.down(1),
 			centro.left(1),

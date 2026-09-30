@@ -98,7 +98,7 @@ class Arma inherits Equipo {
 	
 	// Verifica si una objetivo esta a rango de ataque del equipo
 	method estaEnRango(objetivo) {
-		var distancia = usuario.position().distance(objetivo.position())
+		const distancia = usuario.position().distance(objetivo.position())
 		
 		return (self.rangoMinimo() <= distancia) and (distancia <= self.rangoMaximo())
 	}
@@ -337,7 +337,7 @@ object segundoAtaque {
 
 object tercerAtaque {
 	method atacoA(arma, objetivo) {
-		var explosion = new ExplosionPerforante(objetoEnlazado = objetivo)
+			const explosion = new ExplosionPerforante(objetoEnlazado = objetivo)
 		game.addVisual(explosion)
 		new EventoSimple(
 			lista = eventos02Segundos,

@@ -65,7 +65,7 @@ class ObjetoConVida inherits ObjetoEnJuego {
 	
 	// Disminuye los puntos de salud en la cantidad indicada sin bajar de cero
 	override method sufrirDanio(danio, agresor) {
-		var parpadeoRojo = new ParpadeoRojo(objetoEnlazado = self)
+		const parpadeoRojo = new ParpadeoRojo(objetoEnlazado = self)
 		game.addVisual(parpadeoRojo)
 		
 		new EventoSimple(

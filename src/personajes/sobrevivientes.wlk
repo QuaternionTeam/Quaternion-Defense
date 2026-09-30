@@ -22,30 +22,30 @@ class Sobreviviente inherits Personaje {
 	var vidaPorNivel
 	var nivel = 1
 	var experienciaActual = 0
-	const habilidadesActivasIniciales = { [
+	const habilidadesActivasIniciales = [
 			new HabilidadActiva(),
 			new HabilidadActiva(),
 			new HabilidadActiva()
-		] }
-	const habilidadesPasivasIniciales = { [
+		]
+	const habilidadesPasivasIniciales = [
 			new HabilidadPasiva(),
 			new HabilidadPasiva(),
 			new HabilidadPasiva()
-		] }
-	const habilidadesActivasAdicionales = { [
+		]
+	const habilidadesActivasAdicionales = [
 			new HabilidadActiva(),
 			new HabilidadActiva(),
 			new HabilidadActiva(),
 			new HabilidadActiva(),
 			new HabilidadActiva()
-		] }
-	const habilidadesPasivasAdicionales = { [
+		]
+	const habilidadesPasivasAdicionales = [
 			new HabilidadPasiva(),
 			new HabilidadPasiva(),
 			new HabilidadPasiva(),
 			new HabilidadPasiva(),
 			new HabilidadPasiva()
-		] }
+		]
 	var habilidadesActivas = []
 	var habilidadesPasivas = []
 	var objetoDeInteraccion = null
@@ -65,7 +65,7 @@ class Sobreviviente inherits Personaje {
 		pantalonesActuales = nuevosPantalones
 	}
 	
-	method multiplicadorDeDanio() = 50
+	override method multiplicadorDeDanio() = 50
 	
 	method escenario() = escenario
 	

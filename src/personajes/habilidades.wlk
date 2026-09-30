@@ -565,7 +565,7 @@ class CocktailMolotov inherits HabilidadActiva
 		
 		const efecto = new EventoSimple(lista = eventos02Segundos, demora = 0.2, accion =
 		{
-			var sonidoConjunto = new SonidoConjunto();
+			const sonidoConjunto = new SonidoConjunto();
 			
 			sonido.reproducir("Romper_Botella.wav")
 			

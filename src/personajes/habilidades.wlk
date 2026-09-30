@@ -432,7 +432,7 @@ class ResurreccionIndividual
 	
 	method efectoDeActivacion(usuario, nivelHabilidad)
 	{
-		usuario.escenario().sobrevivientes().filter{ sobreviviente => sobreviviente.estado() == derribado }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
+		usuario.escenario().sobrevivientes().filter{ sobreviviente => sobreviviente.estaDerribado() }.anyOne().revivir(self.porcentajeDeVidaAlRevivir(usuario, nivelHabilidad))
 	}
 
 	method image() = "assets/Habilidades/Revivir.png"

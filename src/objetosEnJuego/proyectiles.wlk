@@ -44,7 +44,7 @@ class Proyectil inherits ObjetoEnJuego
 		self.efecto(objetivo, tirador)
 	}
 	
-	method efecto(_objetivo, _tirador)
+	method efecto(unObjetivo, unTirador)
 	
 	method desaparecer()
 	{
@@ -58,32 +58,32 @@ class Proyectil inherits ObjetoEnJuego
 class FlechaSimple inherits Proyectil
 {	
 	method nombre() = "Flecha_Simple"
-	override method efecto(_objetivo, _tirador) {}
+	override method efecto(unObjetivo, unTirador) {}
 	override method image() = "assets/Proyectiles/" + self.nombre() + "/" + direccion.toString() + ".png"
 }
 
 class FlechaIgnea inherits FlechaSimple
 {
 	override method nombre() = "Flecha_Ignea"
-	override method efecto(objetivo, tirador) {	objetivo.quemar(tirador, 3) }
+	override method efecto(unObjetivo, unTirador) {	unObjetivo.quemar(unTirador, 3) }
 }
 
 class FlechaGelida inherits FlechaSimple
 {
 	override method nombre() = "Flecha_Gelida"
-	override method efecto(objetivo, tirador) { objetivo.escarchar(3) }
+	override method efecto(unObjetivo, unTirador) { unObjetivo.escarchar(3) }
 }
 
 class FlechaOscura inherits FlechaSimple
 {
 	override method nombre() = "Flecha_Oscura"
-	override method efecto(objetivo, tirador) { objetivo.cegar(3) }
+	override method efecto(unObjetivo, unTirador) { unObjetivo.cegar(3) }
 }
 
 class FlechaPerforante inherits FlechaSimple
 {
 	override method nombre() = "Flecha_Perforante"
-	override method efecto(objeto, tirador) { objeto.desangrar(3) }
+	override method efecto(unObjetivo, unTirador) { unObjetivo.desangrar(3) }
 }
 
 /*class GranadaExplosiva inherits Proyectil

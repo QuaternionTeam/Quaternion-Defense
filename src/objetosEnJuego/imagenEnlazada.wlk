@@ -51,10 +51,10 @@ class AnimacionEnlazada inherits ImagenEnlazada {
 	const property animacion = new EventoPeriodico(
 		lista = eventos02Segundos,
 		periodo = periodo,
-		accion = { self.avanzarAnimacion(momentoMaximo) }
+		accion = { self.avanzarAnimacion() }
 	)
 	
-	method avanzarAnimacion(momentoMaximo) {
+	method avanzarAnimacion() {
 		momentoDeAnimacion += 1
 		
 		if (momentoDeAnimacion == momentoMaximo) {

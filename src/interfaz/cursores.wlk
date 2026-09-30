@@ -36,8 +36,7 @@ object cursorSobrevivienteSeleccionado inherits ImagenEnlazada (
 	override method image() = "assets/Interfaz/Cursores/Cursor_Sobreviviente_Seleccionado.png"
 }
 
-object cursorDeInventario inherits Cursor {
-	var property position = game.at(game.width() - 2, game.height() - 2)
+object cursorDeInventario inherits Cursor (position = game.at(game.width() - 2, game.height() - 2)) {
 	
 	// MOVIMIENTO
 	// Mueve el cursor a la nueva posicion sin salir del inventario

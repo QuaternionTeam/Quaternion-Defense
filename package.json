@@ -6,9 +6,9 @@
   "author": "Quaternion Team",
   "license": "ISC",
   "scripts": {
-    "lint": "wollok lint --skipValidations -p ./src",
-    "test": "wollok test --skipValidations -p ./src",
-    "start": "wollok run juego.QuaternionDefense --skipValidations -p ./src --verbose"
+    "lint": "wollok lint -p ./src",
+    "test": "wollok test -p ./src",
+    "start": "wollok run juego.QuaternionDefense -p ./src --verbose"
   },
   "dependencies": {
     "wollok-ts-cli": "^1.1.0"

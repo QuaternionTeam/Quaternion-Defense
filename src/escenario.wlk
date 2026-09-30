@@ -267,7 +267,7 @@ object escenario {
 	}
 	
 	// Verdadero si puede estar en esa posicion, Falso si no
-	method esAtravesable(posicion) = game.getObjectsIn(posicion).all(
+	method esAtravesable(posicion) = self.estaDentro(posicion) and game.getObjectsIn(posicion).all(
 		{ objeto => objeto.esAtravesable() }
 	)
 	

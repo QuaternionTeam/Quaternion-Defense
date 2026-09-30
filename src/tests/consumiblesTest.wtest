@@ -4,11 +4,16 @@ import items.consumibles.*
 describe "Hierba Verde" {
 	var hierbaVerde = new HierbaVerde(cantidad = 5)
 	
+	method initialize() {
+		betty.inicializar()
+	}
+	
 	test "La Hierba Verde cura 15% de vida a un sobreviviente" {
-		betty.sufrirDanio(50, betty)
-		hierbaVerde.consumir(betty)
+		// Vida maxima de Betty = 100 + 27 = 127
+		betty.sufrirDanio(50, betty) // 127 - 50 = 77
+		hierbaVerde.consumir(betty) // + 15% de 127 (19.05) -> 97 (redondeado)
 		
-		assert.equals(70, betty.vidaActual())
+		assert.equals(97, betty.vidaActual())
 	}
 	
 	test "La La cantidad de Hierba Verde se reduce en uno cada vez que se consume" {
